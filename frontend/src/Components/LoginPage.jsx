@@ -1,6 +1,6 @@
 import { Formik, Field, Form } from 'formik'
 
-const LoginPage = () => {
+export const LoginPage = () => {
     return ( <div>
         <h1>Authorization</h1>
         <Formik
@@ -34,5 +34,3 @@ const LoginPage = () => {
     </Formik>
     </div>)
 }
-
-export default LoginPage

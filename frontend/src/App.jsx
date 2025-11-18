@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {} from ''
+import { NotFoundPage } from './Components/NotFoundPage';
+import { ChatPage } from './Components/ChatPage'
+import { LoginPage } from './Components/LoginPage'
 
 function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='*' element={<ErrorPage/>}></Route>
-        <Route path='/'></Route>
-        <Route path='/login' element={<AuthorizationForm/>}></Route>
+        <Route path='/' element={<ChatPage/>}></Route>
+        <Route path='/login' element={<LoginPage/>}></Route>
+        <Route path='*' element={<NotFoundPage/>}></Route>
       </Routes>
     </BrowserRouter>
   )
