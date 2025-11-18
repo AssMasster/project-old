@@ -5,17 +5,17 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-  port: 5002,  // Фронтенд будет на порту 5002
+  port: 5002, 
   proxy: {
     // Прокси для REST API
     '/api': {
-      target: 'http://localhost:5001',  // Сервер на порту 5001
+      target: 'http://localhost:5001',  
     },
     // Прокси для WebSocket (чат)
     '/socket.io': {
-      target: 'ws://localhost:5001',    // WebSocket сервер
-      ws: true,                         // Включить поддержку WebSocket
-      rewriteWsOrigin: true,            // Исправить заголовки для WS
+      target: 'ws://localhost:5001',   
+      ws: true,                     
+      rewriteWsOrigin: true,           
     },
   },
 }
