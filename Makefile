@@ -1,7 +1,5 @@
-build: {
+build:
 	cd frontend && npm run build
-}
 
-start: {
+start:
 	npx start-server -s ./frontend/dist
-}

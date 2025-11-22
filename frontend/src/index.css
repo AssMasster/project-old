@@ -59,3 +59,27 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+.connection-status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.connection-status.online {
+  background: #d4edda;
+  color: #155724;
+}
+
+.connection-status.offline {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.message small {
+  color: #6c757d;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
