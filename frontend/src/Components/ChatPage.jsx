@@ -5,11 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchChannels, setCurrentChannel } from '../store/slices/channelsSlice';
 import { fetchMessages, sendMessage, addMessageFromSocket } from '../store/slices/messagesSlice';
 import socketService from '../utils/socket';
+import AddChannelModal from './modals/AddChannelModal';
+import RemoveChannelModal from './modals/RemoveChannelModal';
+import RenameChannelModal from './modals/RenameChannelModal';
+import ChannelDropdown from './ChannelDropdown';
 
 const ChatPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [newMessage, setNewMessage] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [selectedChannelId, setSelectedChannelId] = useState(null);
   
   const { items: channels, currentChannelId, loading: channelsLoading } = useSelector(state => state.channels);
   const { items: messages, loading: messagesLoading, sending: messageSending } = useSelector(state => state.messages);
@@ -64,57 +72,143 @@ const ChatPage = () => {
     }
   };
 
+  // Обработчики модальных окон
+  const handleShowAddModal = () => setShowAddModal(true);
+  const handleHideAddModal = () => setShowAddModal(false);
+
+  const handleShowRemoveModal = (channelId) => {
+    setSelectedChannelId(channelId);
+    setShowRemoveModal(true);
+  };
+
+  const handleHideRemoveModal = () => {
+    setShowRemoveModal(false);
+    setSelectedChannelId(null);
+  };
+
+  const handleShowRenameModal = (channelId) => {
+    setSelectedChannelId(channelId);
+    setShowRenameModal(true);
+  };
+
+  const handleHideRenameModal = () => {
+    setShowRenameModal(false);
+    setSelectedChannelId(null);
+  };
+
   if (channelsLoading || messagesLoading) {
-    return <div>Загрузка чата...</div>;
+    return (
+      <div className="chat-container">
+        <div className="loading-container">
+          <div>Загрузка чата...</div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="chat-container">
       <div className="channels-sidebar">
-        <h3>Каналы</h3>
-        <ul>
+        <div className="channels-header">
+          <h3>Каналы</h3>
+          <button 
+            type="button" 
+            className="btn btn-sm btn-outline-primary channel-add-btn"
+            onClick={handleShowAddModal}
+            title="Добавить канал"
+          >
+            +
+          </button>
+        </div>
+        
+        <ul className="channels-list">
           {channels.map(channel => (
-            <li 
-              key={channel.id} 
-              className={channel.id === currentChannelId ? 'active' : ''}
-              onClick={() => dispatch(setCurrentChannel(channel.id))}
+            <ChannelDropdown
+              key={channel.id}
+              channelId={channel.id}
+              onRename={handleShowRenameModal}
+              onRemove={handleShowRemoveModal}
             >
-              # {channel.name}
-            </li>
+              <li 
+                className={channel.id === currentChannelId ? 'active' : ''}
+                onClick={() => dispatch(setCurrentChannel(channel.id))}
+              >
+                <span className="channel-name"># {channel.name}</span>
+                {channel.id === currentChannelId && (
+                  <span className="channel-dropdown-icon">▼</span>
+                )}
+              </li>
+            </ChannelDropdown>
           ))}
         </ul>
       </div>
       
       <div className="chat-main">
-        <h3># {currentChannel?.name || 'Выберите канал'}</h3>
-        
-        {/* Индикатор подключения */}
-        <div className="connection-status">
-          {socketService.isConnected ? '🟢 Online' : '🔴 Offline'}
+        <div className="chat-header">
+          <h3># {currentChannel?.name || 'Выберите канал'}</h3>
+          
+          {/* Индикатор подключения */}
+          <div className={`connection-status ${socketService.isConnected ? 'online' : 'offline'}`}>
+            {socketService.isConnected ? '🟢 Online' : '🔴 Offline'}
+          </div>
         </div>
         
         <div className="messages-container">
-          {channelMessages.map(message => (
-            <div key={message.id} className="message">
-              <strong>{message.username}:</strong> {message.body}
-              <small> ({new Date(message.createdAt).toLocaleTimeString()})</small>
+          {channelMessages.length === 0 ? (
+            <div className="no-messages">
+              <p>В этом канале пока нет сообщений</p>
+              <p className="text-muted">Напишите первое сообщение!</p>
             </div>
-          ))}
+          ) : (
+            channelMessages.map(message => (
+              <div key={message.id} className="message">
+                <div className="message-header">
+                  <strong className="message-username">{message.username}</strong>
+                  <small className="message-time">
+                    {new Date(message.createdAt).toLocaleTimeString()}
+                  </small>
+                </div>
+                <div className="message-body">{message.body}</div>
+              </div>
+            ))
+          )}
         </div>
         
         <form className="message-form" onSubmit={handleSendMessage}>
           <input 
             type="text" 
-            placeholder="Введите сообщение..." 
+            placeholder={`Введите сообщение в #${currentChannel?.name || 'канал'}...`}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            disabled={messageSending}
+            disabled={messageSending || !currentChannelId}
           />
-          <button type="submit" disabled={messageSending || !newMessage.trim()}>
+          <button 
+            type="submit" 
+            disabled={messageSending || !newMessage.trim() || !currentChannelId}
+            className="send-button"
+          >
             {messageSending ? 'Отправка...' : 'Отправить'}
           </button>
         </form>
       </div>
+
+      {/* Модальные окна */}
+      <AddChannelModal 
+        show={showAddModal} 
+        onHide={handleHideAddModal} 
+      />
+      
+      <RemoveChannelModal 
+        show={showRemoveModal}
+        onHide={handleHideRemoveModal}
+        channelId={selectedChannelId}
+      />
+      
+      <RenameChannelModal 
+        show={showRenameModal}
+        onHide={handleHideRenameModal}
+        channelId={selectedChannelId}
+      />
     </div>
   );
 };
