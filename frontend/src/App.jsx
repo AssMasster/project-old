@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { NotFoundPage } from './Components/NotFoundPage';
-import { ChatPage } from './Components/ChatPage'
-import { LoginPage } from './Components/LoginPage'
+import Header from './components/Header';
+import NotFoundPage from './components/NotFoundPage';
+import ChatPage from './components/ChatPage';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
 
-function App () {
+function App() {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -14,13 +16,22 @@ function App () {
       delete axios.defaults.headers.common['Authorization'];
     }
   }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<ChatPage/>}></Route>
-        <Route path='/login' element={<LoginPage/>}></Route>
-        <Route path='*' element={<NotFoundPage/>}></Route>
-      </Routes>
+      <div className="d-flex flex-column min-vh-100">
+        <Header />
+        <main className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<ChatPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
-  )
+  );
 }
+
+export default App;
