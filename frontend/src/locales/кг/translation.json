@@ -1,0 +1,63 @@
+{
+  "common": {
+    "chat": "Hexlet Chat",
+    "loading": "Загрузка...",
+    "online": "Онлайн",
+    "offline": "Офлайн",
+    "send": "Отправить",
+    "sending": "Отправка...",
+    "cancel": "Отменить",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "rename": "Переименовать",
+    "add": "Добавить",
+    "confirm": "Подтвердить",
+    "logout": "Выйти",
+    "login": "Войти",
+    "signup": "Зарегистрироваться",
+    "required": "Обязательное поле"
+  },
+  "auth": {
+    "authorization": "Авторизация",
+    "registration": "Регистрация",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтверждение пароля",
+    "enterUsername": "Введите имя пользователя",
+    "enterPassword": "Введите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "noAccount": "Нет аккаунта?",
+    "haveAccount": "Уже есть аккаунт?",
+    "authError": "Ошибка авторизации. Проверьте логин и пароль.",
+    "registrationError": "Ошибка регистрации. Попробуйте еще раз.",
+    "userExists": "Пользователь с таким именем уже существует",
+    "usernameLength": "Имя пользователя должно быть от 3 до 20 символов",
+    "passwordLength": "Пароль должен быть не менее 6 символов",
+    "passwordsMatch": "Пароли должны совпадать"
+  },
+  "channels": {
+    "channels": "Каналы",
+    "addChannel": "Добавить канал",
+    "removeChannel": "Удалить канал",
+    "renameChannel": "Переименовать канал",
+    "channelName": "Название канала",
+    "enterChannelName": "Введите название канала",
+    "channelExists": "Канал с таким именем уже существует",
+    "channelNameLength": "Название должно быть от 3 до 20 символов",
+    "removeConfirm": "Уверены, что хотите удалить канал",
+    "removeWarning": "Все сообщения в этом канале будут удалены.",
+    "manageChannel": "Управление каналом"
+  },
+  "chat": {
+    "chooseChannel": "Выберите канал",
+    "noMessages": "В этом канале пока нет сообщений",
+    "firstMessage": "Напишите первое сообщение!",
+    "enterMessage": "Введите сообщение...",
+    "enterMessageIn": "Введите сообщение в #{{channel}}..."
+  },
+  "errors": {
+    "notFound": "404 - Страница не найдена",
+    "networkError": "Ошибка сети",
+    "unknownError": "Неизвестная ошибка"
+  }
+}

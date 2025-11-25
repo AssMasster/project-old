@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   return (
     <div className="auth-container">
       <div className="auth-form">
-        <h1>Авторизация</h1>
+        <h1>{t('auth.authorization')}</h1>
         
         {error && (
           <div className="alert alert-danger" role="alert">
@@ -25,46 +27,42 @@ const LoginPage = () => {
               setError('');
               const response = await axios.post('/api/v1/login', values);
               
-              // Сохраняем токен
               localStorage.setItem('authToken', response.data.token);
-              
-              // Настраиваем axios headers
               axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
           
-              // Редирект на главную
               navigate('/');
             } catch (err) {
-              setError('Ошибка авторизации. Проверьте логин и пароль.');
+              setError(t('auth.authError'));
             } finally {
               setSubmitting(false);
             }
           }}
         >
-          {({ isSubmitting, errors, touched }) => (
+          {({ isSubmitting }) => (
             <Form>
               <div className="mb-3">
                 <label htmlFor="username" className="form-label">
-                  Имя пользователя
+                  {t('auth.username')}
                 </label>
                 <Field 
                   id="username"
                   name="username" 
                   type="text"
                   className="form-control"
-                  placeholder="Введите логин"
+                  placeholder={t('auth.enterUsername')}
                 />
               </div>
               
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
-                  Пароль
+                  {t('auth.password')}
                 </label>
                 <Field 
                   id="password"
                   name="password" 
                   type="password"
                   className="form-control"
-                  placeholder="Введите пароль"
+                  placeholder={t('auth.enterPassword')}
                 />
               </div>
               
@@ -73,16 +71,16 @@ const LoginPage = () => {
                 className="btn btn-primary w-100"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Вход...' : 'Войти'}
+                {isSubmitting ? t('common.sending') : t('common.login')}
               </button>
             </Form>
           )}
         </Formik>
 
         <div className="mt-3 text-center">
-          <span>Нет аккаунта? </span>
+          <span>{t('auth.noAccount')} </span>
           <Link to="/signup" className="btn btn-link p-0">
-            Зарегистрироваться
+            {t('common.signup')}
           </Link>
         </div>
       </div>

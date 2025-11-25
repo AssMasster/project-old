@@ -1,8 +1,9 @@
-// frontend/src/components/Header.jsx
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const Header = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const isAuthenticated = !!localStorage.getItem('authToken');
 
@@ -16,7 +17,7 @@ const Header = () => {
     <nav className="navbar navbar-light bg-light border-bottom">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Hexlet Chat
+          {t('common.chat')}
         </Link>
         
         <div className="d-flex">
@@ -25,15 +26,15 @@ const Header = () => {
               className="btn btn-outline-danger btn-sm"
               onClick={handleLogout}
             >
-              Выйти
+              {t('common.logout')}
             </button>
           ) : (
             <div className="d-flex gap-2">
               <Link to="/login" className="btn btn-outline-primary btn-sm">
-                Войти
+                {t('common.login')}
               </Link>
               <Link to="/signup" className="btn btn-primary btn-sm">
-                Регистрация
+                {t('common.signup')}
               </Link>
             </div>
           )}

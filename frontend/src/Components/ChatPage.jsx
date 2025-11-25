@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChannels, setCurrentChannel } from '../store/slices/channelsSlice';
@@ -10,6 +11,7 @@ import RenameChannelModal from './modals/RenameChannelModal';
 import ChannelDropdown from './ChannelDropdown';
 
 const ChatPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [newMessage, setNewMessage] = useState('');
@@ -99,7 +101,7 @@ const ChatPage = () => {
     return (
       <div className="chat-container">
         <div className="loading-container">
-          <div>Загрузка чата...</div>
+          <div>{t('common.loading')}</div>
         </div>
       </div>
     );
@@ -109,12 +111,12 @@ const ChatPage = () => {
     <div className="chat-container">
       <div className="channels-sidebar">
         <div className="channels-header">
-          <h3>Каналы</h3>
+          <h3>{t('channels.channels')}</h3>
           <button 
             type="button" 
             className="btn btn-sm btn-outline-primary channel-add-btn"
             onClick={handleShowAddModal}
-            title="Добавить канал"
+            title={t('channels.addChannel')}
           >
             +
           </button>
@@ -144,19 +146,19 @@ const ChatPage = () => {
       
       <div className="chat-main">
         <div className="chat-header">
-          <h3># {currentChannel?.name || 'Выберите канал'}</h3>
+          <h3># {currentChannel?.name || t('chat.chooseChannel')}</h3>
           
           {/* Индикатор подключения */}
           <div className={`connection-status ${socketService.isConnected ? 'online' : 'offline'}`}>
-            {socketService.isConnected ? '🟢 Online' : '🔴 Offline'}
+            {socketService.isConnected ? `🟢 ${t('common.online')}` : `🔴 ${t('common.offline')}`}
           </div>
         </div>
         
         <div className="messages-container">
           {channelMessages.length === 0 ? (
             <div className="no-messages">
-              <p>В этом канале пока нет сообщений</p>
-              <p className="text-muted">Напишите первое сообщение!</p>
+              <p>{t('chat.noMessages')}</p>
+              <p className="text-muted">{t('chat.firstMessage')}</p>
             </div>
           ) : (
             channelMessages.map(message => (
@@ -176,7 +178,7 @@ const ChatPage = () => {
         <form className="message-form" onSubmit={handleSendMessage}>
           <input 
             type="text" 
-            placeholder={`Введите сообщение в #${currentChannel?.name || 'канал'}...`}
+            placeholder={t('chat.enterMessageIn', { channel: currentChannel?.name || t('chat.chooseChannel').toLowerCase() })}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             disabled={messageSending || !currentChannelId}
@@ -186,7 +188,7 @@ const ChatPage = () => {
             disabled={messageSending || !newMessage.trim() || !currentChannelId}
             className="send-button"
           >
-            {messageSending ? 'Отправка...' : 'Отправить'}
+            {messageSending ? t('common.sending') : t('common.send')}
           </button>
         </form>
       </div>
