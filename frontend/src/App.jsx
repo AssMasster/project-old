@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import Header from './components/Header';
 import NotFoundPage from './components/NotFoundPage';
@@ -29,6 +30,20 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
+        
+        {/* Глобальный контейнер для уведомлений */}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </BrowserRouter>
   );

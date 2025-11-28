@@ -2,18 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChannels, setCurrentChannel } from '../store/slices/channelsSlice';
+import { fetchChannels, setCurrentChannel, addChannel, removeChannel, renameChannel } from '../store/slices/channelsSlice';
 import { fetchMessages, sendMessage, addMessageFromSocket } from '../store/slices/messagesSlice';
 import socketService from '../utils/socket';
 import AddChannelModal from './modals/AddChannelModal';
 import RemoveChannelModal from './modals/RemoveChannelModal';
 import RenameChannelModal from './modals/RenameChannelModal';
 import ChannelDropdown from './ChannelDropdown';
+import { useToast } from '../hooks/useToast';
 
 const ChatPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {
+    showNetworkError,
+    showLoadDataError,
+    showChannelAdded,
+    showChannelRenamed,
+    showChannelRemoved,
+    showMessageSent,
+  } = useToast();
+  
   const [newMessage, setNewMessage] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
@@ -27,34 +37,36 @@ const ChatPage = () => {
   const channelMessages = messages.filter(message => message.channelId === currentChannelId);
 
   useEffect(() => {
-    // Проверка авторизации
     const token = localStorage.getItem('authToken');
     if (!token) {
       navigate('/login');
       return;
     }
 
-    // Загрузка данных
-    dispatch(fetchChannels());
-    dispatch(fetchMessages());
+    const loadData = async () => {
+      try {
+        await Promise.all([
+          dispatch(fetchChannels()).unwrap(),
+          dispatch(fetchMessages()).unwrap(),
+        ]);
+      } catch (error) {
+        showLoadDataError();
+      }
+    };
 
-    // Подключение WebSocket
+    loadData();
+
     socketService.connect();
-
-    // Подписка на новые сообщения
     socketService.onNewMessage((message) => {
-      console.log('New message received:', message);
       dispatch(addMessageFromSocket(message));
     });
 
-    // Очистка при размонтировании
     return () => {
       socketService.removeAllListeners();
       socketService.disconnect();
     };
-  }, [navigate, dispatch]);
+  }, [navigate, dispatch, showLoadDataError]);
 
-  // Обработчик отправки сообщения
   const handleSendMessage = async (e) => {
     e.preventDefault();
     
@@ -66,16 +78,25 @@ const ChatPage = () => {
         body: newMessage.trim(),
       })).unwrap();
       
-      setNewMessage(''); // Очищаем поле ввода
+      setNewMessage('');
+      showMessageSent();
     } catch (error) {
-      console.error('Ошибка отправки сообщения:', error);
-      // Можно показать уведомление пользователю
+      showNetworkError();
     }
   };
 
-  // Обработчики модальных окон
   const handleShowAddModal = () => setShowAddModal(true);
   const handleHideAddModal = () => setShowAddModal(false);
+
+  const handleAddChannel = async (channelName) => {
+    try {
+      await dispatch(addChannel(channelName)).unwrap();
+      showChannelAdded();
+      handleHideAddModal();
+    } catch (error) {
+      showNetworkError();
+    }
+  };
 
   const handleShowRemoveModal = (channelId) => {
     setSelectedChannelId(channelId);
@@ -87,6 +108,18 @@ const ChatPage = () => {
     setSelectedChannelId(null);
   };
 
+  const handleRemoveChannel = async () => {
+    if (!selectedChannelId) return;
+    
+    try {
+      await dispatch(removeChannel(selectedChannelId)).unwrap();
+      showChannelRemoved();
+      handleHideRemoveModal();
+    } catch (error) {
+      showNetworkError();
+    }
+  };
+
   const handleShowRenameModal = (channelId) => {
     setSelectedChannelId(channelId);
     setShowRenameModal(true);
@@ -95,6 +128,21 @@ const ChatPage = () => {
   const handleHideRenameModal = () => {
     setShowRenameModal(false);
     setSelectedChannelId(null);
+  };
+
+  const handleRenameChannel = async (newName) => {
+    if (!selectedChannelId) return;
+    
+    try {
+      await dispatch(renameChannel({ 
+        channelId: selectedChannelId, 
+        newName 
+      })).unwrap();
+      showChannelRenamed();
+      handleHideRenameModal();
+    } catch (error) {
+      showNetworkError();
+    }
   };
 
   if (channelsLoading || messagesLoading) {
@@ -148,7 +196,6 @@ const ChatPage = () => {
         <div className="chat-header">
           <h3># {currentChannel?.name || t('chat.chooseChannel')}</h3>
           
-          {/* Индикатор подключения */}
           <div className={`connection-status ${socketService.isConnected ? 'online' : 'offline'}`}>
             {socketService.isConnected ? `🟢 ${t('common.online')}` : `🔴 ${t('common.offline')}`}
           </div>
@@ -193,22 +240,24 @@ const ChatPage = () => {
         </form>
       </div>
 
-      {/* Модальные окна */}
       <AddChannelModal 
         show={showAddModal} 
-        onHide={handleHideAddModal} 
+        onHide={handleHideAddModal}
+        onSubmit={handleAddChannel}
       />
       
       <RemoveChannelModal 
         show={showRemoveModal}
         onHide={handleHideRemoveModal}
         channelId={selectedChannelId}
+        onSubmit={handleRemoveChannel}
       />
       
       <RenameChannelModal 
         show={showRenameModal}
         onHide={handleHideRenameModal}
         channelId={selectedChannelId}
+        onSubmit={handleRenameChannel}
       />
     </div>
   );

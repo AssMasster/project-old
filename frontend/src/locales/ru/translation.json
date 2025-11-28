@@ -59,5 +59,15 @@
     "notFound": "404 - Страница не найдена",
     "networkError": "Ошибка сети",
     "unknownError": "Неизвестная ошибка"
+  },
+  "notifications": {
+    "networkError": "Ошибка сети. Проверьте подключение к интернету.",
+    "loadDataError": "Ошибка загрузки данных.",
+    "channelAdded": "Канал создан",
+    "channelRenamed": "Канал переименован", 
+    "channelRemoved": "Канал удалён",
+    "messageSent": "Сообщение отправлено",
+    "authError": "Ошибка авторизации",
+    "unknownError": "Произошла неизвестная ошибка"
   }
 }

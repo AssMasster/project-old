@@ -1,23 +1,23 @@
-// frontend/src/components/modals/AddChannelModal.jsx
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChannel } from '../../store/slices/channelsSlice';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
-const channelSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(3, 'Название должно быть от 3 до 20 символов')
-    .max(20, 'Название должно быть от 3 до 20 символов')
-    .required('Обязательное поле'),
-});
-
-const AddChannelModal = ({ show, onHide }) => {
+const AddChannelModal = ({ show, onHide, onSubmit }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { items: channels, loading } = useSelector(state => state.channels);
   const inputRef = useRef(null);
+
+  const channelSchema = yup.object().shape({
+    name: yup
+      .string()
+      .min(3, t('channels.channelNameLength'))
+      .max(20, t('channels.channelNameLength'))
+      .required(t('common.required')),
+  });
 
   useEffect(() => {
     if (show && inputRef.current) {
@@ -27,9 +27,8 @@ const AddChannelModal = ({ show, onHide }) => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      await dispatch(addChannel(values.name)).unwrap();
+      await onSubmit(values.name);
       resetForm();
-      onHide();
     } catch (error) {
       console.error('Error adding channel:', error);
     } finally {
@@ -40,7 +39,7 @@ const AddChannelModal = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('channels.addChannel')}</Modal.Title>
       </Modal.Header>
       
       <Formik
@@ -59,7 +58,7 @@ const AddChannelModal = ({ show, onHide }) => {
                   name="name"
                   as={Form.Control}
                   type="text"
-                  placeholder="Введите название канала"
+                  placeholder={t('channels.enterChannelName')}
                   disabled={isSubmitting}
                   isInvalid={channels.some(channel => 
                     channel.name.toLowerCase() === values.name.toLowerCase()
@@ -70,7 +69,7 @@ const AddChannelModal = ({ show, onHide }) => {
                   channel.name.toLowerCase() === values.name.toLowerCase()
                 ) && (
                   <Form.Text className="text-danger">
-                    Канал с таким именем уже существует
+                    {t('channels.channelExists')}
                   </Form.Text>
                 )}
               </Form.Group>
@@ -82,7 +81,7 @@ const AddChannelModal = ({ show, onHide }) => {
                 onClick={onHide}
                 disabled={isSubmitting}
               >
-                Отменить
+                {t('common.cancel')}
               </Button>
               <Button 
                 variant="primary" 
@@ -93,7 +92,7 @@ const AddChannelModal = ({ show, onHide }) => {
                   )
                 }
               >
-                {isSubmitting ? 'Добавление...' : 'Добавить'}
+                {isSubmitting ? t('common.sending') : t('common.add')}
               </Button>
             </Modal.Footer>
           </Form>

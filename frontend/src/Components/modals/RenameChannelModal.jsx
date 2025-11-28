@@ -2,24 +2,25 @@ import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { renameChannel } from '../../store/slices/channelsSlice';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
-const channelSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(3, 'Название должно быть от 3 до 20 символов')
-    .max(20, 'Название должно быть от 3 до 20 символов')
-    .required('Обязательное поле'),
-});
-
-const RenameChannelModal = ({ show, onHide, channelId }) => {
+const RenameChannelModal = ({ show, onHide, channelId, onSubmit }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { items: channels, loading } = useSelector(state => state.channels);
   const channel = useSelector(state => 
     state.channels.items.find(ch => ch.id === channelId)
   );
   const inputRef = useRef(null);
+
+  const channelSchema = yup.object().shape({
+    name: yup
+      .string()
+      .min(3, t('channels.channelNameLength'))
+      .max(20, t('channels.channelNameLength'))
+      .required(t('common.required')),
+  });
 
   useEffect(() => {
     if (show && inputRef.current) {
@@ -31,12 +32,8 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
     if (!channelId) return;
     
     try {
-      await dispatch(renameChannel({ 
-        channelId, 
-        newName: values.name 
-      })).unwrap();
+      await onSubmit(values.name);
       resetForm();
-      onHide();
     } catch (error) {
       console.error('Error renaming channel:', error);
     } finally {
@@ -49,7 +46,7 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Переименовать канал</Modal.Title>
+        <Modal.Title>{t('channels.renameChannel')}</Modal.Title>
       </Modal.Header>
       
       <Formik
@@ -69,7 +66,7 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
                   name="name"
                   as={Form.Control}
                   type="text"
-                  placeholder="Введите новое название канала"
+                  placeholder={t('channels.enterChannelName')}
                   disabled={isSubmitting}
                   isInvalid={channels.some(ch => 
                     ch.id !== channelId && 
@@ -82,7 +79,7 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
                   ch.name.toLowerCase() === values.name.toLowerCase()
                 ) && (
                   <Form.Text className="text-danger">
-                    Канал с таким именем уже существует
+                    {t('channels.channelExists')}
                   </Form.Text>
                 )}
               </Form.Group>
@@ -94,7 +91,7 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
                 onClick={onHide}
                 disabled={isSubmitting}
               >
-                Отменить
+                {t('common.cancel')}
               </Button>
               <Button 
                 variant="primary" 
@@ -106,7 +103,7 @@ const RenameChannelModal = ({ show, onHide, channelId }) => {
                   )
                 }
               >
-                {isSubmitting ? 'Переименование...' : 'Переименовать'}
+                {isSubmitting ? t('common.sending') : t('common.save')}
               </Button>
             </Modal.Footer>
           </Form>

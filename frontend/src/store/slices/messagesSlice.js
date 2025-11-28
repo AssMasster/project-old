@@ -1,17 +1,18 @@
-// frontend/src/store/slices/messagesSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';
 
-// Существующий thunk для получения сообщений
 export const fetchMessages = createAsyncThunk(
   'messages/fetchMessages',
-  async () => {
-    const response = await axios.get('/api/v1/messages');
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/api/v1/messages');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка загрузки сообщений');
+    }
   }
 );
 
-// НОВЫЙ: Отправка сообщения
 export const sendMessage = createAsyncThunk(
   'messages/sendMessage',
   async ({ channelId, body }, { rejectWithValue }) => {
@@ -22,7 +23,7 @@ export const sendMessage = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Ошибка отправки');
+      return rejectWithValue(error.response?.data?.message || 'Ошибка отправки сообщения');
     }
   }
 );
@@ -32,18 +33,16 @@ const messagesSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
-    sending: false, // отдельный флаг для отправки
+    sending: false,
     error: null,
   },
   reducers: {
-    // НОВЫЙ: Добавление сообщения из WebSocket
     addMessageFromSocket: (state, action) => {
       state.items.push(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder
-      // Загрузка сообщений
       .addCase(fetchMessages.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -54,16 +53,14 @@ const messagesSlice = createSlice({
       })
       .addCase(fetchMessages.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
-      // Отправка сообщения
       .addCase(sendMessage.pending, (state) => {
         state.sending = true;
         state.error = null;
       })
-      .addCase(sendMessage.fulfilled, (state, action) => {
+      .addCase(sendMessage.fulfilled, (state) => {
         state.sending = false;
-        // Сообщение добавляется через WebSocket, поэтому не дублируем здесь
       })
       .addCase(sendMessage.rejected, (state, action) => {
         state.sending = false;
