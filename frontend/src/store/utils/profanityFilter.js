@@ -1,30 +1,12 @@
-import { Profanity } from 'leo-profanity';
+import leoProfanity from 'leo-profanity';
 
-// Инициализация фильтра
-const profanityFilter = new Profanity();
-
-// Настройка русского словаря
-profanityFilter.loadDictionary('ru');
-
-// Функция для фильтрации текста
+// Используйте напрямую
 export const filterProfanity = (text) => {
   if (!text || typeof text !== 'string') return text;
-  
-  return profanityFilter.clean(text);
+  return leoProfanity.clean(text);
 };
 
-// Функция для проверки содержит ли текст нецензурные слова
 export const hasProfanity = (text) => {
   if (!text || typeof text !== 'string') return false;
-  
-  return profanityFilter.check(text);
+  return leoProfanity.check(text);
 };
-
-// Функция для получения списка нецензурных слов в тексте
-export const getProfanityWords = (text) => {
-  if (!text || typeof text !== 'string') return [];
-  
-  return profanityFilter.list(text);
-};
-
-export default profanityFilter;
