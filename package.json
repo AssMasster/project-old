@@ -20,6 +20,7 @@
     "start": "npx start-server -s ./frontend/dist"
   },
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.4"
+    "@hexlet/chat-server": "^2.0.4",
+    "express": "^5.1.0"
   }
 }
