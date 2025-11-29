@@ -1,3 +1,4 @@
+// frontend/src/hooks/useToast.js
 import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,13 @@ export const useToast = () => {
     });
   }, []);
 
+  const showWarning = useCallback((message) => {
+    toast.warning(message, {
+      position: "top-right",
+      autoClose: 4000,
+    });
+  }, []);
+
   const showNetworkError = useCallback(() => {
     showError(t('notifications.networkError'));
   }, [showError, t]);
@@ -27,20 +35,32 @@ export const useToast = () => {
     showError(t('notifications.loadDataError'));
   }, [showError, t]);
 
-  const showChannelAdded = useCallback(() => {
-    showSuccess(t('notifications.channelAdded'));
+  const showChannelAdded = useCallback((hadProfanity = false) => {
+    let message = t('notifications.channelAdded');
+    if (hadProfanity) {
+      message += ` (${t('validation.profanityWarning')})`;
+    }
+    showSuccess(message);
   }, [showSuccess, t]);
 
-  const showChannelRenamed = useCallback(() => {
-    showSuccess(t('notifications.channelRenamed'));
+  const showChannelRenamed = useCallback((hadProfanity = false) => {
+    let message = t('notifications.channelRenamed');
+    if (hadProfanity) {
+      message += ` (${t('validation.profanityWarning')})`;
+    }
+    showSuccess(message);
   }, [showSuccess, t]);
 
   const showChannelRemoved = useCallback(() => {
     showSuccess(t('notifications.channelRemoved'));
   }, [showSuccess, t]);
 
-  const showMessageSent = useCallback(() => {
-    showSuccess(t('notifications.messageSent'));
+  const showMessageSent = useCallback((hadProfanity = false) => {
+    let message = t('notifications.messageSent');
+    if (hadProfanity) {
+      message += ` (${t('validation.profanityWarning')})`;
+    }
+    showSuccess(message);
   }, [showSuccess, t]);
 
   const showAuthError = useCallback(() => {
@@ -51,9 +71,14 @@ export const useToast = () => {
     showError(t('notifications.unknownError'));
   }, [showError, t]);
 
+  const showProfanityWarning = useCallback(() => {
+    showWarning(t('validation.profanityWarning'));
+  }, [showWarning, t]);
+
   return {
     showSuccess,
     showError,
+    showWarning,
     showNetworkError,
     showLoadDataError,
     showChannelAdded,
@@ -62,5 +87,6 @@ export const useToast = () => {
     showMessageSent,
     showAuthError,
     showUnknownError,
+    showProfanityWarning,
   };
 };

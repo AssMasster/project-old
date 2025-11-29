@@ -2,26 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChannels, setCurrentChannel, addChannel, removeChannel, renameChannel } from '../store/slices/channelsSlice';
-import { fetchMessages, sendMessage, addMessageFromSocket } from '../store/slices/messagesSlice';
+import { fetchChannels, setCurrentChannel, addChannel, removeChannel, renameChannel, clearProfanityFlag as clearChannelsProfanityFlag } from '../store/slices/channelsSlice';
+import { fetchMessages, sendMessage, addMessageFromSocket, clearProfanityFlag as clearMessagesProfanityFlag } from '../store/slices/messagesSlice';
 import socketService from '../utils/socket';
 import AddChannelModal from './modals/AddChannelModal';
 import RemoveChannelModal from './modals/RemoveChannelModal';
 import RenameChannelModal from './modals/RenameChannelModal';
 import ChannelDropdown from './ChannelDropdown';
 import { useToast } from '../hooks/useToast';
+import { hasProfanity } from '../utils/profanityFilter';
 
 const ChatPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
+    showSuccess,
+    showWarning,
     showNetworkError,
     showLoadDataError,
     showChannelAdded,
     showChannelRenamed,
     showChannelRemoved,
     showMessageSent,
+    showProfanityWarning,
   } = useToast();
   
   const [newMessage, setNewMessage] = useState('');
@@ -30,11 +34,38 @@ const ChatPage = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [selectedChannelId, setSelectedChannelId] = useState(null);
   
-  const { items: channels, currentChannelId, loading: channelsLoading } = useSelector(state => state.channels);
-  const { items: messages, loading: messagesLoading, sending: messageSending } = useSelector(state => state.messages);
+  const { 
+    items: channels, 
+    currentChannelId, 
+    loading: channelsLoading, 
+    lastActionHadProfanity: channelsHadProfanity 
+  } = useSelector(state => state.channels);
+  
+  const { 
+    items: messages, 
+    loading: messagesLoading, 
+    sending: messageSending, 
+    lastMessageHadProfanity: messagesHadProfanity 
+  } = useSelector(state => state.messages);
   
   const currentChannel = channels.find(channel => channel.id === currentChannelId);
   const channelMessages = messages.filter(message => message.channelId === currentChannelId);
+
+  // Показываем уведомление о фильтрации нецензурных слов в сообщениях
+  useEffect(() => {
+    if (messagesHadProfanity) {
+      showProfanityWarning();
+      dispatch(clearMessagesProfanityFlag());
+    }
+  }, [messagesHadProfanity, showProfanityWarning, dispatch]);
+
+  // Показываем уведомление о фильтрации нецензурных слов в каналах
+  useEffect(() => {
+    if (channelsHadProfanity) {
+      showProfanityWarning();
+      dispatch(clearChannelsProfanityFlag());
+    }
+  }, [channelsHadProfanity, showProfanityWarning, dispatch]);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -72,14 +103,22 @@ const ChatPage = () => {
     
     if (!newMessage.trim() || !currentChannelId || messageSending) return;
 
+    // Проверяем на нецензурные слова (дополнительная клиентская проверка)
+    const containsProfanity = hasProfanity(newMessage);
+    
+    if (containsProfanity) {
+      // Показываем предупреждение, но всё равно отправляем - серверная фильтрация сработает
+      showWarning(t('validation.profanityDetected'));
+    }
+
     try {
-      await dispatch(sendMessage({
+      const result = await dispatch(sendMessage({
         channelId: currentChannelId,
         body: newMessage.trim(),
       })).unwrap();
       
       setNewMessage('');
-      showMessageSent();
+      showMessageSent(result.hadProfanity);
     } catch (error) {
       showNetworkError();
     }
@@ -90,8 +129,8 @@ const ChatPage = () => {
 
   const handleAddChannel = async (channelName) => {
     try {
-      await dispatch(addChannel(channelName)).unwrap();
-      showChannelAdded();
+      const result = await dispatch(addChannel(channelName)).unwrap();
+      showChannelAdded(result.hadProfanity);
       handleHideAddModal();
     } catch (error) {
       showNetworkError();
@@ -134,11 +173,11 @@ const ChatPage = () => {
     if (!selectedChannelId) return;
     
     try {
-      await dispatch(renameChannel({ 
+      const result = await dispatch(renameChannel({ 
         channelId: selectedChannelId, 
         newName 
       })).unwrap();
-      showChannelRenamed();
+      showChannelRenamed(result.hadProfanity);
       handleHideRenameModal();
     } catch (error) {
       showNetworkError();
