@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",  
-    "start": "serve -s ./frontend/dist"     
+    "start": "npx serve -s ./frontend/dist"     
   },
   "dependencies": {
     "@hexlet/chat-server": "^2.0.4",
