@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChannels, setCurrentChannel, addChannel, removeChannel, renameChannel, clearProfanityFlag as clearChannelsProfanityFlag } from '../store/slices/channelsSlice';
 import { fetchMessages, sendMessage, addMessageFromSocket, clearProfanityFlag as clearMessagesProfanityFlag } from '../store/slices/messagesSlice';
-import socketService from '../utils/socket';
+import socketService from '../store/utils/socket';
 import AddChannelModal from './modals/AddChannelModal';
 import RemoveChannelModal from './modals/RemoveChannelModal';
 import RenameChannelModal from './modals/RenameChannelModal';
 import ChannelDropdown from './ChannelDropdown';
 import { useToast } from '../hooks/useToast';
-import { hasProfanity } from '../utils/profanityFilter';
+import { hasProfanity } from '../store/utils/profanityFilter';
 
 const ChatPage = () => {
   const { t } = useTranslation();

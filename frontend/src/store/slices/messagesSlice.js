@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';
-import { filterProfanity, hasProfanity } from '../../utils/profanityFilter';
+import { filterProfanity, hasProfanity } from '../utils/profanityFilter';
 
 export const fetchMessages = createAsyncThunk(
   'messages/fetchMessages',

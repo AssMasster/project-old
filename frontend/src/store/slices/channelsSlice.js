@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';
-import { filterProfanity, hasProfanity } from '../../utils/profanityFilter';
+import { filterProfanity, hasProfanity } from '../utils/profanityFilter';
 
 export const fetchChannels = createAsyncThunk(
   'channels/fetchChannels',
@@ -60,7 +60,17 @@ export const renameChannel = createAsyncThunk(
   }
 );
 
-// removeChannel остается без изменений
+export const removeChannel = createAsyncThunk(
+  'channels/removeChannel',
+  async (channelId, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/api/v1/channels/${channelId}`);
+      return channelId;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Ошибка удаления канала');
+    }
+  }
+);
 
 const channelsSlice = createSlice({
   name: 'channels',

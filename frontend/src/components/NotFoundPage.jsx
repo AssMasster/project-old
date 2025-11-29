@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const NotFoundPage = () => {
+export default NotFoundPage = () => {
   const { t } = useTranslation();
   
   return (

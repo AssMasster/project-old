@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
-import Header from './components/Header';
+import Header from './components/Header.jsx';
 import NotFoundPage from './components/NotFoundPage';
 import ChatPage from './components/ChatPage';
 import LoginPage from './components/LoginPage';
