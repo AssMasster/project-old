@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import Header from './components/Header.jsx';
-import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './components/NotFoundPage.jsx';
 import ChatPage from './components/ChatPage';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';

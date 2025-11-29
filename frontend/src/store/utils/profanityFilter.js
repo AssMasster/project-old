@@ -1,4 +1,4 @@
-import leoProfanity from 'leo-profanity';
+/*import leoProfanity from 'leo-profanity';
 
 // Используйте напрямую
 export const filterProfanity = (text) => {
@@ -9,4 +9,7 @@ export const filterProfanity = (text) => {
 export const hasProfanity = (text) => {
   if (!text || typeof text !== 'string') return false;
   return leoProfanity.check(text);
-};
+}; */
+
+export const filterProfanity = (text) => text;
+export const hasProfanity = (text) => false;
