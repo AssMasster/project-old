@@ -15,11 +15,11 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd frontend && npm run build",
-    "start": "npx serve -s ./frontend/dist -l $PORT"
+    "test": "echo \"Error: no test specified\" && exit 1",  
+    "start": "serve -s ./frontend/dist"     
   },
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.4"
+    "@hexlet/chat-server": "^2.0.4",
+    "serve": "^14.2.5"
   }
 }
