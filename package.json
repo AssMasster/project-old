@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd frontend && npm run build",
-    "start": "npx start-server -s ./frontend/dist"
+    "start": "node server.js"
   },
   "dependencies": {
     "@hexlet/chat-server": "^2.0.4",
