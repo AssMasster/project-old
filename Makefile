@@ -1,6 +1,11 @@
-build:
-	cd frontend && npm install && npm run build
-	npm install
+install:
+	npm ci
 
 start:
-	node server.js
+	npx start-server -s ./frontend/dist
+
+build:
+	cd frontend && npm ci && npm run build
+
+develop:
+	npm run build && npx @hexlet/chat-server
