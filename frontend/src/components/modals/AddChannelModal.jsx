@@ -54,7 +54,7 @@ const AddChannelModal = ({ show, onHide, onSubmit }) => {
             <Modal.Body>
               <Form.Group>
                 <Field 
-                  innerRef={inputRef}
+                  innerref={inputRef}
                   name="name"
                   as={Form.Control}
                   type="text"
