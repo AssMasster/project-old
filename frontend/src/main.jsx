@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
-// Конфигурация Rollbar с ВАШИМ токеном
+// Конфигурация Rollbar
 const rollbarConfig = {
   accessToken: '7796e27b108a4c25b3fb24b577008db9',
   environment: 'production',

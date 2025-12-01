@@ -5,9 +5,9 @@ export default function TestErrorComponent() {
   const triggerError = () => {
     const a = null;
     try {
-      return a.hello(); // Это вызовет TypeError
+      return a.hello(); 
     } catch (error) {
-      throw error; // Пробрасываем дальше для ErrorBoundary
+      throw error; 
     }
   };
 

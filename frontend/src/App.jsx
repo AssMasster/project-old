@@ -25,7 +25,7 @@ function App() {
   const testRollbar = () => {
     try {
       const a = null
-      a.hello() // Это вызовет ошибку как в примере
+      a.hello() 
     } catch (error) {
       rollbar.error('Test error from Hexlet Chat', error)
       alert('Test error sent to Rollbar! Check dashboard.')
@@ -58,7 +58,7 @@ function App() {
                 marginTop: '10px'
               }}
             >
-              🐞 Send Test Error to Rollbar
+               Send Test Error to Rollbar
             </button>
             <p style={{ marginTop: '10px', fontSize: '0.9em', color: '#666' }}>
               Token: 7796e27b108a4c25b3fb24b577008db9
