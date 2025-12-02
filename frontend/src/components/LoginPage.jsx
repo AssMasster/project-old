@@ -11,36 +11,41 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [authError, setAuthError] = useState('');
 
+  // Выносим логику в отдельную функцию
+  const handleLoginSubmit = async (values, { setSubmitting }) => {
+    if (!values.username.trim() || !values.password.trim()) {
+      toast.error(t('login.fillAllFields'));
+      setSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/v1/login', values);
+      const { token, username, id } = response.data;
+      
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('username', username);
+      localStorage.setItem('userId', id);
+      
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      toast.success(t('login.success'));
+      navigate('/');
+    } catch (error) {
+      setAuthError(t('login.invalidCredentials'));
+      toast.error(t('login.invalidCredentials'));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    validationSchema: validationSchemas.loginSchema, // Используем схему
-    onSubmit: async (values) => {
-      // Проверка на заполненность полей
-      if (!values.username.trim() || !values.password.trim()) {
-        toast.error(t('login.fillAllFields'));
-        return;
-      }
-
-      try {
-        const response = await axios.post('/api/v1/login', values);
-        const { token, username, id } = response.data;
-        
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('username', username);
-        localStorage.setItem('userId', id);
-        
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        
-        toast.success(t('login.success'));
-        navigate('/');
-      } catch (error) {
-        setAuthError(t('login.invalidCredentials'));
-        toast.error(t('login.invalidCredentials'));
-      }
-    },
+    validationSchema: validationSchemas.loginSchema,
+    onSubmit: handleLoginSubmit,
   });
 
   return (
