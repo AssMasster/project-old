@@ -1,4 +1,3 @@
-
 export const initializeSocketWithAuth = (socketService) => {
   const token = localStorage.getItem('authToken');
   
@@ -9,13 +8,9 @@ export const initializeSocketWithAuth = (socketService) => {
 
   socketService.connect();
   
-  // Добавляем токен в сокет при подключении
   socketService.on('connect', () => {
-    console.log('Authenticating WebSocket...');
     socketService.emit('authenticate', { token }, (response) => {
-      if (response.status === 'success') {
-        console.log('WebSocket authenticated successfully');
-      } else {
+      if (response.status !== 'success') {
         console.error('WebSocket authentication failed:', response.message);
       }
     });
@@ -24,7 +19,6 @@ export const initializeSocketWithAuth = (socketService) => {
   return true;
 };
 
-// Функция для отправки сообщения через сокет (альтернатива HTTP)
 export const sendMessageViaSocket = (socketService, messageData) => {
   return new Promise((resolve, reject) => {
     socketService.emit('sendMessage', messageData, (response) => {
@@ -37,7 +31,6 @@ export const sendMessageViaSocket = (socketService, messageData) => {
   });
 };
 
-// Хук для использования сокета в компонентах
 export const useSocket = (event, callback, dependencies = []) => {
   const { useEffect } = require('react');
   

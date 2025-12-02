@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -6,9 +7,12 @@ const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const isAuthenticated = !!localStorage.getItem('authToken');
+  const username = localStorage.getItem('username');
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     delete axios.defaults.headers.common['Authorization'];
     navigate('/login');
   };
@@ -20,23 +24,19 @@ const Header = () => {
           {t('common.chat')}
         </Link>
         
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           {isAuthenticated ? (
-            <button 
-              className="btn btn-outline-danger btn-sm"
-              onClick={handleLogout}
-            >
-              {t('common.logout')}
-            </button>
+            <>
+              <span className="me-3">{t('common.welcome')}, {username}!</span>
+              <button 
+                className="btn btn-outline-danger btn-sm"
+                onClick={handleLogout}
+              >
+                {t('common.logout')}
+              </button>
+            </>
           ) : (
-            <div className="d-flex gap-2">
-              <Link to="/login" className="btn btn-outline-primary btn-sm">
-                {t('common.login')}
-              </Link>
-              <Link to="/signup" className="btn btn-primary btn-sm">
-                {t('common.signup')}
-              </Link>
-            </div>
+            null
           )}
         </div>
       </div>

@@ -1,0 +1,111 @@
+{
+  "common": {
+    "chat": "Chat",
+    "loading": "Loading...",
+    "online": "Online",
+    "offline": "Offline",
+    "send": "Send",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "rename": "Rename",
+    "add": "Add",
+    "confirm": "Confirm",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up",
+    "required": "Required field",
+    "welcome": "Welcome",
+    "notAuthenticated": "Not authenticated",
+    "goToHome": "Go to Home",
+    "goToMain": "Go to Main"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "enterUsername": "Enter username",
+    "enterPassword": "Enter password",
+    "fillAllFields": "Please fill all fields",
+    "success": "Login successful",
+    "invalidCredentials": "Invalid username or password",
+    "noAccount": "Don't have an account?",
+    "submit": "Login"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "enterUsername": "Enter username",
+    "enterPassword": "Enter password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "fillAllFields": "Please fill all fields",
+    "success": "Registration successful",
+    "error": "Registration error",
+    "userExists": "User already exists",
+    "haveAccount": "Already have an account?",
+    "submit": "Sign Up"
+  },
+  "channels": {
+    "channels": "Channels",
+    "addChannel": "Add channel",
+    "removeChannel": "Remove channel",
+    "renameChannel": "Rename channel",
+    "channelName": "Channel name",
+    "enterChannelName": "Enter channel name",
+    "channelExists": "Channel with this name already exists",
+    "channelNameLength": "Name must be between 3 and 20 characters",
+    "removeConfirm": "Are you sure you want to delete the channel",
+    "removeWarning": "All messages in this channel will be deleted.",
+    "manageChannel": "Manage channel"
+  },
+  "chat": {
+    "chooseChannel": "Choose a channel",
+    "noMessages": "No messages in this channel yet",
+    "firstMessage": "Write the first message!",
+    "enterMessage": "Enter message...",
+    "enterMessageIn": "Enter message in #{{channel}}..."
+  },
+  "errors": {
+    "notFound": "404 - Page Not Found",
+    "networkError": "Network Error",
+    "unknownError": "Unknown Error",
+    "pageNotExist": "The requested page does not exist",
+    "goToMain": "Go to Home",
+    "goToHome": "Go to Home"
+  },
+  "notifications": {
+    "networkError": "Network error. Check your internet connection.",
+    "loadDataError": "Error loading data.",
+    "channelAdded": "Channel created",
+    "channelRenamed": "Channel renamed",
+    "channelRemoved": "Channel removed",
+    "messageSent": "Message sent",
+    "authError": "Authorization error",
+    "unknownError": "An unknown error occurred"
+  },
+  "validation": {
+    "profanityDetected": "Text contains inappropriate words",
+    "profanityWarning": "Message contains profanity and has been filtered",
+    "usernameMin": "Username must be at least 3 characters",
+    "usernameMax": "Username must be at most 20 characters",
+    "usernameRequired": "Username is required",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordRequired": "Password is required"
+  },
+  "modal": {
+    "addChannel": "Add Channel",
+    "renameChannel": "Rename Channel",
+    "removeChannel": "Remove Channel",
+    "channelName": "Channel Name",
+    "enterChannelName": "Enter channel name",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "save": "Save",
+    "areYouSure": "Are you sure?",
+    "thisActionCannotBeUndone": "This action cannot be undone"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "common": {
-    "chat": "Hexlet Chat",
+    "chat": "Чат",
     "loading": "Загрузка...",
     "online": "Онлайн",
     "offline": "Офлайн",
@@ -15,7 +15,11 @@
     "logout": "Выйти",
     "login": "Войти",
     "signup": "Зарегистрироваться",
-    "required": "Обязательное поле"
+    "required": "Обязательное поле",
+    "welcome": "Добро пожаловать",
+    "notAuthenticated": "Не авторизован",
+    "goToHome": "На главную",
+    "goToMain": "На главную"
   },
   "auth": {
     "authorization": "Авторизация",
@@ -34,6 +38,33 @@
     "usernameLength": "Имя пользователя должно быть от 3 до 20 символов",
     "passwordLength": "Пароль должен быть не менее 6 символов",
     "passwordsMatch": "Пароли должны совпадать"
+  },
+  "login": {
+    "title": "Авторизация",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "enterUsername": "Введите имя пользователя",
+    "enterPassword": "Введите пароль",
+    "fillAllFields": "Заполните все поля",
+    "success": "Вы успешно вошли",
+    "invalidCredentials": "Неверное имя пользователя или пароль",
+    "noAccount": "Нет аккаунта?",
+    "submit": "Войти"
+  },
+  "signup": {
+    "title": "Регистрация",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Подтверждение пароля",
+    "enterUsername": "Введите имя пользователя",
+    "enterPassword": "Введите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "fillAllFields": "Заполните все поля",
+    "success": "Регистрация успешна",
+    "error": "Ошибка регистрации",
+    "userExists": "Пользователь уже существует",
+    "haveAccount": "Уже есть аккаунт?",
+    "submit": "Зарегистрироваться"
   },
   "channels": {
     "channels": "Каналы",
@@ -58,7 +89,10 @@
   "errors": {
     "notFound": "404 - Страница не найдена",
     "networkError": "Ошибка сети",
-    "unknownError": "Неизвестная ошибка"
+    "unknownError": "Неизвестная ошибка",
+    "pageNotExist": "Запрашиваемая страница не существует",
+    "goToMain": "На главную",
+    "goToHome": "На главную"
   },
   "notifications": {
     "networkError": "Ошибка сети. Проверьте подключение к интернету.",
@@ -72,6 +106,24 @@
   },
   "validation": {
     "profanityDetected": "Текст содержит недопустимые слова",
-    "profanityWarning": "Сообщение содержит нецензурные слова и было отфильтровано"
+    "profanityWarning": "Сообщение содержит нецензурные слова и было отфильтровано",
+    "usernameMin": "Имя пользователя должно содержать минимум 3 символа",
+    "usernameMax": "Имя пользователя должно содержать максимум 20 символов",
+    "usernameRequired": "Имя пользователя обязательно",
+    "passwordMin": "Пароль должен содержать минимум 6 символов",
+    "passwordRequired": "Пароль обязателен"
+  },
+  "modal": {
+    "addChannel": "Добавить канал",
+    "renameChannel": "Переименовать канал",
+    "removeChannel": "Удалить канал",
+    "channelName": "Название канала",
+    "enterChannelName": "Введите название канала",
+    "cancel": "Отмена",
+    "submit": "Отправить",
+    "delete": "Удалить",
+    "save": "Сохранить",
+    "areYouSure": "Вы уверены?",
+    "thisActionCannotBeUndone": "Это действие нельзя отменить"
   }
 }

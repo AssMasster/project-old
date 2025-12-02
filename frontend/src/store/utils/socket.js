@@ -6,19 +6,17 @@ class SocketService {
     this.isConnected = false;
     this.reconnectAttempts = 0;
     this.maxReconnectAttempts = 5;
-    this.listeners = new Map(); // Для хранения колбэков
+    this.listeners = new Map();
   }
 
   connect() {
     if (this.socket) {
-      console.log('WebSocket already exists');
+      console.warn('WebSocket already exists');
       return;
     }
 
-    console.log('Connecting WebSocket...');
-
     this.socket = io({
-      transports: ['websocket', 'polling'], // Fallback механизм
+      transports: ['websocket', 'polling'],
       timeout: 10000,
       reconnection: true,
       reconnectionAttempts: this.maxReconnectAttempts,
@@ -26,16 +24,13 @@ class SocketService {
       reconnectionDelayMax: 5000,
     });
 
-    // Обработчик успешного подключения
     this.socket.on('connect', () => {
-      console.log('WebSocket connected successfully');
       this.isConnected = true;
       this.reconnectAttempts = 0;
     });
 
-    // Обработчик отключения
     this.socket.on('disconnect', (reason) => {
-      console.log('WebSocket disconnected:', reason);
+      console.warn('WebSocket disconnected:', reason);
       this.isConnected = false;
       
       if (reason === 'io server disconnect') {
@@ -43,41 +38,33 @@ class SocketService {
       }
     });
 
-    // Обработчик ошибки подключения
     this.socket.on('connect_error', (error) => {
       console.error('WebSocket connection error:', error);
       this.isConnected = false;
     });
 
-    // Обработчик попытки переподключения
     this.socket.on('reconnect_attempt', (attempt) => {
       this.reconnectAttempts = attempt;
-      console.log(`WebSocket reconnect attempt: ${attempt}/${this.maxReconnectAttempts}`);
     });
 
-    // Обработчик успешного переподключения
     this.socket.on('reconnect', (attempt) => {
-      console.log(`WebSocket reconnected successfully after ${attempt} attempts`);
+      console.warn(`WebSocket reconnected successfully after ${attempt} attempts`);
       this.isConnected = true;
       this.reconnectAttempts = 0;
     });
 
-    // Обработчик неудачного переподключения
     this.socket.on('reconnect_failed', () => {
       console.error('WebSocket reconnection failed after all attempts');
       this.isConnected = false;
     });
 
-    // Обработчик ошибки
     this.socket.on('error', (error) => {
       console.error('WebSocket error:', error);
     });
   }
 
-  // Отключение WebSocket
   disconnect() {
     if (this.socket) {
-      console.log('Disconnecting WebSocket...');
       this.socket.disconnect();
       this.socket = null;
       this.isConnected = false;
@@ -85,7 +72,6 @@ class SocketService {
     }
   }
 
-  // Подписка на событие новых сообщений
   onNewMessage(callback) {
     if (!this.socket) {
       console.warn('WebSocket not connected, cannot add listener');
@@ -96,7 +82,6 @@ class SocketService {
     this.listeners.set('newMessage', callback);
   }
 
-  // Подписка на любое событие
   on(event, callback) {
     if (!this.socket) {
       console.warn('WebSocket not connected, cannot add listener');
@@ -107,7 +92,6 @@ class SocketService {
     this.listeners.set(event, callback);
   }
 
-  // Отправка события на сервер
   emit(event, data, callback) {
     if (!this.socket || !this.isConnected) {
       console.warn('WebSocket not connected, cannot emit event');
@@ -118,7 +102,6 @@ class SocketService {
     this.socket.emit(event, data, callback);
   }
 
-  // Удаление конкретного слушателя
   removeListener(event, callback) {
     if (this.socket) {
       this.socket.off(event, callback);
@@ -126,7 +109,6 @@ class SocketService {
     }
   }
 
-  // Удаление всех слушателей
   removeAllListeners() {
     if (this.socket) {
       this.socket.removeAllListeners();
@@ -134,26 +116,22 @@ class SocketService {
     }
   }
 
-  // Получение текущего состояния подключения
   getConnectionState() {
     if (!this.socket) return 'disconnected';
     
     return this.socket.connected ? 'connected' : 'disconnected';
   }
 
-  // Получение ID сокета
   getSocketId() {
     return this.socket?.id || null;
   }
 
-  // Принудительное переподключение
   reconnect() {
     if (this.socket) {
       this.socket.connect();
     }
   }
 
-  // Получение статистики подключения
   getStats() {
     return {
       isConnected: this.isConnected,
@@ -164,7 +142,6 @@ class SocketService {
   }
 }
 
-// Создаем единственный экземпляр (Singleton)
 const socketService = new SocketService();
 
 export default socketService;

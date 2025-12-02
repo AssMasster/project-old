@@ -12,8 +12,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 // Конфигурация Rollbar
 const rollbarConfig = {
-  accessToken: '7796e27b108a4c25b3fb24b577008db9',
-  environment: 'production',
+  accessToken: import.meta.env.VITE_ROLLBAR_TOKEN || '7796e27b108a4c25b3fb24b577008db9',
+  environment: import.meta.env.NODE_ENV || 'development',
   captureUncaught: true,
   captureUnhandledRejections: true,
   payload: {
