@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { validationSchemas } from '../utils/validationSchemas'; 
+import { validationSchemas } from '../utils/validationSchemas.js'; 
 
 const LoginPage = () => {
   const { t } = useTranslation();
