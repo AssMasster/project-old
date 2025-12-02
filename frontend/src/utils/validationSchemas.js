@@ -1,5 +1,4 @@
-// frontend/src/utils/validationSchemas.js
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 export const validationSchemas = {
   loginSchema: yup.object({
@@ -36,4 +35,4 @@ export const validationSchemas = {
       .oneOf([yup.ref('password'), null], 'Passwords must match')
       .required('Confirm password is required'),
   }),
-}
+};
