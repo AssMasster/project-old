@@ -1,29 +1,28 @@
+# Установка зависимостей для сервера и фронтенда
 install:
-	npm ci
+	npm install
+	npm install --prefix frontend
 
+# Сборка фронтенд-приложения
+build:
+	rm -rf frontend/dist
+	npm run build --prefix frontend
+
+# Запуск бэкенд-сервера
 start:
 	npx start-server -s ./frontend/dist
 
-build:
-	rm -rf frontend/dist
-	cd frontend && npm ci && npm run build
+# Запуск фронтенда в режиме разработки
+start-frontend:
+	npm run dev --prefix frontend
 
-develop:
-	npm run build && npx @hexlet/chat-server
+# Запуск бэкенда и фронтенда параллельно
+start-all:
+	make start & make start-frontend
 
-test:
-	# Собираем
-	cd frontend && npm run build
+lint:
+	npm run lint --prefix frontend
+
+fix:
+	npm run lint:fix --prefix frontend
 	
-	# Запускаем сервер
-	npx start-server -s ./frontend/dist -p 5000 &
-	SERVER_PID=$$!
-	
-	# Ждем
-	sleep 15
-	
-	# Запускаем тесты
-	npx playwright test --timeout=60000
-	
-	# Останавливаем сервер
-	kill $$SERVER_PID 2>/dev/null || true

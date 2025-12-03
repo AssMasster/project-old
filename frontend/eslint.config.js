@@ -1,29 +1,42 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import functionalPlugin from 'eslint-plugin-functional';
 
-export default defineConfig([
-  globalIgnores(['dist']),
+export default [
+  js.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
+    plugins: {
+      import: importPlugin,
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      functional: functionalPlugin,
+    },
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+    settings: {
+      react: { version: 'detect' },
+      'import/external-module-folders': ['node_modules', '../node_modules'],
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react/react-in-jsx-scope': 'off',
+      'no-param-reassign': [
+        'error',
+        {
+          props: true,
+          ignorePropertyModificationsFor: ['state', 'draft'],
+        },
+      ],
+      'import/no-cycle': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      'react/jsx-props-no-spreading': 'off',
+      'max-len': ['error', { code: 120 }],
+      'react/button-has-type': 'off',
+      'import/prefer-default-export': 'off',
     },
   },
-])
+];
