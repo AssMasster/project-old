@@ -1,16 +1,11 @@
-.PHONY: install build start test
-
 install:
 	npm ci
-	cd frontend && npm ci
-
-build:
-	cd frontend && npm run build
 
 start:
 	npx start-server -s ./frontend/dist
 
-test:
-	npx start-server -s ./frontend/dist &
-	sleep 10
-	npx playwright test
+build:
+	cd frontend && npm ci && npm run build
+
+develop:
+	npm run build && npx @hexlet/chat-server
