@@ -5,6 +5,7 @@ install:
 
 # Сборка фронтенд-приложения
 build:
+	cd frontend && npm ci
 	cd frontend && npm run build
 
 # Запуск бэкенд-сервера
