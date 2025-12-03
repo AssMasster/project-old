@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import functionalPlugin from 'eslint-plugin-functional';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
   js.configs.recommended,
@@ -11,7 +11,7 @@ export default [
       import: importPlugin,
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
-      functional: functionalPlugin,
+      'react-refresh': reactRefresh,
     },
     languageOptions: {
       ecmaVersion: 'latest',
@@ -24,6 +24,10 @@ export default [
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
       'no-param-reassign': [
         'error',
         {

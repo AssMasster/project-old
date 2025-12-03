@@ -1,12 +1,11 @@
 # Установка зависимостей для сервера и фронтенда
 install:
-	npm install
-	npm install --prefix frontend
+	npm ci
+	cd frontend && npm ci
 
 # Сборка фронтенд-приложения
 build:
-	rm -rf frontend/dist
-	npm run build --prefix frontend
+	cd frontend && npm run build
 
 # Запуск бэкенд-сервера
 start:
@@ -21,7 +20,7 @@ start-all:
 	make start & make start-frontend
 
 lint:
-	npm run lint --prefix frontend
+	cd frontend && npm run lint
 
 fix:
 	npm run lint:fix --prefix frontend
