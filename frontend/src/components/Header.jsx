@@ -21,7 +21,7 @@ const Header = () => {
     <nav className="navbar navbar-light bg-light border-bottom">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          {t('common.chat')}
+          {t('common.chatLabel')}
         </Link>
         
         <div className="d-flex align-items-center">
