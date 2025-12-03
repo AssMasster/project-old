@@ -1,11 +1,24 @@
+lint-frontend:
+	make -C frontend lint
+
 install:
 	npm ci
 
-start:
+start-frontend:
+	make -C frontend start
+
+start-backend:
 	npx start-server -s ./frontend/dist
 
-build:
-	cd frontend && npm ci && npm run build
+deploy:
+	git push heroku main
+
+start:
+	make start-backend
 
 develop:
-	npm run build && npx @hexlet/chat-server
+	make start-backend & make start-frontend
+
+build:
+	rm -rf frontend/dist
+	npm run build
