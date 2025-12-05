@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const StyledButton = styled(Link)`
   display: inline-block;
@@ -64,6 +64,6 @@ const StyledButton = styled(Link)`
       left: 100%;
     }
   }
-`;
+`
 
-export default StyledButton;
+export default StyledButton

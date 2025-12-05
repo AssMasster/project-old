@@ -1,15 +1,15 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { getAuthHeader, handleError } from './apiHelpers.js';
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { getAuthHeader, handleError } from './apiHelpers.js'
 
 export const getMessages = createAsyncThunk('chat/getMessages', async (_, thunkAPI) => {
   try {
-    const response = await axios.get('/api/v1/messages', getAuthHeader());
-    return response.data;
+    const response = await axios.get('/api/v1/messages', getAuthHeader())
+    return response.data
   } catch (err) {
-    return handleError(err, thunkAPI);
+    return handleError(err, thunkAPI)
   }
-});
+})
 
 export const addMessage = createAsyncThunk(
   'chat/addMessage',
@@ -23,13 +23,13 @@ export const addMessage = createAsyncThunk(
           username,
         },
         getAuthHeader(),
-      );
-      return response.data;
+      )
+      return response.data
     } catch (err) {
-      return handleError(err, thunkAPI);
+      return handleError(err, thunkAPI)
     }
   },
-);
+)
 
 export const editMessage = createAsyncThunk(
   'chat/editMessage',
@@ -39,22 +39,22 @@ export const editMessage = createAsyncThunk(
         `/api/v1/messages/${id}`,
         { body },
         getAuthHeader(),
-      );
-      return response.data;
+      )
+      return response.data
     } catch (err) {
-      return handleError(err, thunkAPI);
+      return handleError(err, thunkAPI)
     }
   },
-);
+)
 
 export const removeMessage = createAsyncThunk(
   'chat/removeMessage',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/api/v1/messages/${id}`, getAuthHeader());
-      return response.data;
+      const response = await axios.delete(`/api/v1/messages/${id}`, getAuthHeader())
+      return response.data
     } catch (err) {
-      return handleError(err, thunkAPI);
+      return handleError(err, thunkAPI)
     }
   },
-);
+)
