@@ -1,12 +1,8 @@
-// frontend/eslint.config.js
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import functionalPlugin from 'eslint-plugin-functional';
-
-// Для @stylistic 1.6.0 нужно использовать другой импорт
-import stylistic from '@stylistic/eslint-plugin';
 
 export default [
   js.configs.recommended,
@@ -41,17 +37,12 @@ export default [
       'max-len': ['error', { code: 120 }],
       'react/button-has-type': 'off',
       'import/prefer-default-export': 'off',
-    },
-  },
-  // Отдельный конфиг для @stylistic
-  {
-    plugins: {
-      '@stylistic': stylistic,
-    },
-    rules: {
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
+      
+      // Добавляем правила, которые требуются по ошибкам тестов
+      'semi': ['error', 'never'], // Без точек с запятой
+      'brace-style': ['error', '1tbs'], // Стиль фигурных скобок
+      'arrow-parens': ['error', 'always'], // Скобки в стрелочных функциях
+      'operator-linebreak': ['error', 'before'], // Операторы в начале строки
     },
   },
 ];

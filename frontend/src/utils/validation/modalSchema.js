@@ -10,7 +10,7 @@ const modalSchema = (existingNames, currentName = '') => {
       .min(3, t('validation.modal.tooShort'))
       .max(20, t('validation.modal.tooLong'))
       .notOneOf(
-        existingNames.filter(name => name !== currentName),
+        existingNames.filter((name) => name !== currentName),
         t('validation.modal.channelExists'),
       ),
   })
