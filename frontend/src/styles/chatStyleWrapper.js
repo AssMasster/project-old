@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledChat = styled.div`
   .chat-wrapper {
@@ -199,6 +199,6 @@ const StyledChat = styled.div`
       background: #1a8cd8;
     }
   }
-`
+`;
 
-export default StyledChat
+export default StyledChat;
