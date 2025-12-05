@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <header className="chat-header">
             <h1>
-                <Link to={ROUTES.ROOT}>Code Chat</Link>
+                <Link to={ROUTES.ROOT}>Hexlet Chat</Link>
             </h1>
             <div className="lang-switcher">
                 <LanguageSwitcher/>
