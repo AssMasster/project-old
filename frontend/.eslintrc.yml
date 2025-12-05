@@ -49,11 +49,11 @@ rules:
       ignoreComments: true
       ignoreStrings: true
       ignoreTemplateLiterals: true
-  no-console: off
-  no-underscore-dangle: [error, { allow: [__filename, __dirname] }]
   
-  # @stylistic правила (для исправления ошибок тестов)
+  # @stylistic правила
   '@stylistic/semi': [error, never]
   '@stylistic/brace-style': [error, 1tbs]
-  '@stylistic/arrow-parens': [error, always]
+  '@stylistic/arrow-parens': 
+    - error
+    - as-needed
   '@stylistic/operator-linebreak': [error, before]
