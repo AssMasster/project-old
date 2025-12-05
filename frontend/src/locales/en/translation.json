@@ -1,0 +1,90 @@
+{
+  "auth": {
+    "login": {
+      "title": "Login",
+      "redirectPrompt": "Don't have an account?",
+      "redirectName": "Sign up!",
+      "button": "Log in"
+    },
+    "errors": {
+      "loginFailed": "Login failed",
+      "userExists": "User already exists",
+      "network": "Network error. Try again."
+    },
+    "signUp": {
+      "title": "Create an account",
+      "redirectPrompt": "Already have an account?",
+      "redirectName": "Log in",
+      "button": "Submit"
+    },
+    "formField": {
+      "nickName": "Your nickname",
+      "name": "Name",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    }
+  },
+  "validation": {
+    "auth": {
+      "required": "Required field",
+      "tooShort": "Too short",
+      "tooLong": "Too long",
+      "passwordsMustMatch": "Passwords must match"
+    },
+    "modal": {
+      "required": "Required field",
+      "tooShort": "Too short",
+      "tooLong": "Too long",
+      "channelExists": "A channel with this name already exists"
+    }
+  },
+  "pages": {
+    "notFound": {
+      "title": "404",
+      "message": "Oops! Looks like you got lost",
+      "button": "Go back"
+    }
+  },
+  "modal": {
+    "form": {
+      "netError": "Network error. Try again."
+    },
+    "add": {
+      "title": "Add channel",
+      "buttonConfirm": "Create",
+      "placeholder": "Enter channel name...",
+      "buttonCancel": "Cancel",
+      "toastSuccess": "Channel created",
+      "labelText": "Channel name"
+    },
+    "remove": {
+      "title": "Delete channel",
+      "body": "Are you sure you want to delete the channel?",
+      "buttonConfirm": "Delete",
+      "buttonCancel": "Cancel",
+      "menuItem": "Delete",
+      "toastSuccess": "Channel deleted"
+    },
+    "rename": {
+      "title": "Rename channel",
+      "buttonConfirm": "Confirm",
+      "placeholder": "Enter new name...",
+      "menuItem": "Rename",
+      "buttonCancel": "Cancel",
+      "toastSuccess": "Channel renamed",
+      "labelText": "Channel name"
+    }
+  },
+  "chat": {
+    "messageCount": "{{count}} messages",
+    "placeholder": "Enter your message...",
+    "labelText": "New message"
+  },
+  "sidebar": {
+    "channels": "Channels:",
+    "channelActions": "Channel actions"
+  },
+  "header": {
+    "logoutBtn": "Log out"
+  }
+}

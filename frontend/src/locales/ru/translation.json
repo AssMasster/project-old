@@ -1,0 +1,92 @@
+{
+  "auth": {
+    "login": {
+      "title": "Вход",
+      "redirectPrompt": "Нет аккаунта?",
+      "redirectName": "Регистрация",
+      "button": "Войти"
+    },
+    "errors": {
+      "loginFailed": "Неверные имя пользователя или пароль",
+      "userExists": "Такой пользователь уже существует",
+      "network": "Сетевая ошибка. Попробуйте ещё раз"
+    },
+    "signUp": {
+      "title": "Регистрация",
+      "redirectPrompt": "Уже есть аккаунт?",
+      "redirectName": "Войти",
+      "button": "Регистрация"
+    },
+    "formField": {
+      "nickName": "Ваш ник",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "name": "Имя пользователя"
+    }
+  },
+  "validation": {
+    "auth": {
+      "required": "Обязательное поле",
+      "tooShort": "Не менее 6 символов",
+      "tooLong": "От 3 до 20 символов",
+      "passwordsMustMatch": "Пароли должны совпадать"
+    },
+    "modal": {
+      "required": "Обязательное поле",
+      "tooShort": "От 3 до 20 символов",
+      "tooLong": "От 3 до 20 символов",
+      "channelExists": "Канал с таким именем уже существует"
+    }
+  },
+  "pages": {
+    "notFound": {
+      "title": "404",
+      "message": "Упс! Похоже, вы потерялись",
+      "button": "Вернуться назад"
+    }
+  },
+  "modal": {
+    "form": {
+      "netError": "Ошибка сети, попробуйте снова"
+    },
+    "add": {
+      "title": "Добавить канал",
+      "buttonConfirm": "Создать",
+      "placeholder": "Введите имя канала...",
+      "buttonCancel": "Отмена",
+      "toastSuccess": "Канал создан",
+      "labelText": "Имя канала"
+    },
+    "remove": {
+      "title": "Удалить канал",
+      "body": "Вы уверены, что хотите удалить канал?",
+      "buttonConfirm": "Удалить",
+      "buttonCancel": "Отменить",
+      "menuItem": "Удалить",
+      "toastSuccess": "Канал удалён"
+    },
+    "rename": {
+      "title": "Переименовать канал",
+      "buttonConfirm": "Отправить",
+      "placeholder": "Введите новое имя...",
+      "menuItem": "Переименовать",
+      "buttonCancel": "Отмена",
+      "toastSuccess": "Канал переименован",
+      "labelText": "Имя канала"
+    }
+  },
+  "chat": {
+    "messageCount": "{{count}} сообщений",
+    "placeholder": "Введите сообщение...",
+    "labelText": "Новое сообщение"
+  },
+  "sidebar": {
+    "channels": "Каналы :",
+    "channelActions": "Управление каналом"
+  },
+  "header": {
+    "logoutBtn": "Выход"
+  }
+}
+
+

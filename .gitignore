@@ -1,0 +1,39 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+# If you have nested node_modules in subfolders (e.g., frontend), uncomment:
+# **/node_modules/
+
+# Build output
+dist/
+dist-ssr/
+build/
+
+# Local environment files
+*.local
+.env
+
+# IDE / Editor settings
+.vscode/
+!.vscode/extensions.json
+.idea/
+
+# macOS Finder
+.DS_Store
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Editor swap/temp files
+*.sw?
