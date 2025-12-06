@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 
-export const useAutoScroll = trigger => {
+export const useAutoScroll = (trigger) => {
   const elementRef = useRef(null)
 
   useEffect(() => {

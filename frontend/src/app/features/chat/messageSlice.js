@@ -24,10 +24,10 @@ const messageSlice = createSlice({
       messagesAdapter.removeMany(state, action.payload)
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // addMessage
     builder
-      .addCase(addMessage.pending, state => {
+      .addCase(addMessage.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -42,7 +42,7 @@ const messageSlice = createSlice({
       })
     // getMessages
     builder
-      .addCase(getMessages.pending, state => {
+      .addCase(getMessages.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -58,8 +58,8 @@ const messageSlice = createSlice({
     builder.addCase(removeChannel.fulfilled, (state, action) => {
       const deletedChannelId = action.payload
       const idsToRemove = Object.values(state.entities)
-        .filter(m => m.channelId === deletedChannelId)
-        .map(m => m.id)
+        .filter((m) => m.channelId === deletedChannelId)
+        .map((m) => m.id)
       messagesAdapter.removeMany(state, idsToRemove)
     })
   },
@@ -69,14 +69,14 @@ export const {
   selectById: selectMessageById,
   selectAll: selectAllMessages,
   selectEntities: selectMessagesEntities,
-} = messagesAdapter.getSelectors(state => state.messages)
+} = messagesAdapter.getSelectors((state) => state.messages)
 
 // prettier-ignore
-export const selectMessagesByChannel = channelId => createSelector(
+export const selectMessagesByChannel = (channelId) => createSelector(
   [selectAllMessages],
-  messages => (
+  (messages) => (
     messages.filter(
-      msg => msg.channelId === channelId,
+      (msg) => msg.channelId === channelId,
     )
   ),
 )
