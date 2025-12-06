@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 import FocusLock from 'react-focus-lock'
@@ -19,7 +18,8 @@ const RemoveChannelModal = ({ channelId }) => {
       await dispatch(removeChannel(channelId)).unwrap()
       showSuccess('modal.remove.toastSuccess')
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
     }
   }

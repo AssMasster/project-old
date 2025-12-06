@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import RenameChannelModal from '../chat/components/RenameChannelModal.jsx'
 import AddChannelModal from '../chat/components/AddChannelModal.jsx'

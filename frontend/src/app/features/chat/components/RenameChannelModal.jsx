@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button, FormControl } from 'react-bootstrap'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -27,7 +26,8 @@ const RenameChannelModal = ({ channelId }) => {
       showSuccess('modal.rename.toastSuccess')
       helpers.setSubmitting(false)
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
       helpers.setErrors({ name: err.message || t('modal.form.netError') })
       helpers.setSubmitting(false)

@@ -6,7 +6,8 @@ export const getMessages = createAsyncThunk('chat/getMessages', async (_, thunkA
   try {
     const response = await axios.get('/api/v1/messages', getAuthHeader())
     return response.data
-  } catch (err) {
+  }
+  catch (err) {
     return handleError(err, thunkAPI)
   }
 })
@@ -25,7 +26,8 @@ export const addMessage = createAsyncThunk(
         getAuthHeader(),
       )
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },
@@ -41,7 +43,8 @@ export const editMessage = createAsyncThunk(
         getAuthHeader(),
       )
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },
@@ -53,7 +56,8 @@ export const removeMessage = createAsyncThunk(
     try {
       const response = await axios.delete(`/api/v1/messages/${id}`, getAuthHeader())
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },

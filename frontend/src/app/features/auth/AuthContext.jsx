@@ -37,7 +37,8 @@ export const AuthProvider = ({ children }) => {
       })
       setUser(data.username)
       setToken(data.token)
-    } catch (err) {
+    }
+    catch (err) {
       setError(apiError(err))
       throw err
     }
@@ -52,7 +53,8 @@ export const AuthProvider = ({ children }) => {
       })
       setUser(data.username)
       setToken(data.token)
-    } catch (err) {
+    }
+    catch (err) {
       setError(apiError(err))
       throw err
     }
@@ -76,14 +78,17 @@ export const AuthProvider = ({ children }) => {
     [user, token, error, login, signup, logout],
   )
 
-  return (<AuthContext.Provider value={value}>
-    {children}
-  </AuthContext.Provider>)
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export const useAuthContext = () => {
   const ctx = useContext(AuthContext)
-  if (!ctx)
+  if (!ctx) {
     throw new Error('useAuthContext must be used inside <AuthProvider>')
+  }
   return ctx
 }

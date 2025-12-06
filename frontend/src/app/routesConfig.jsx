@@ -1,4 +1,3 @@
-import React from 'react'
 import LoginPage from './pages/LoginPage.jsx'
 import MainChatPage from './pages/MainChatPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'

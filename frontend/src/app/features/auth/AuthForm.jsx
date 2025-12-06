@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import StyledWrapper from '../../../styles/authFormStyles.js'
@@ -32,7 +31,8 @@ const AuthForm = ({
             try {
               await onSubmit(values)
               navigate(ROUTES.ROOT)
-            } catch (error) {
+            }
+            catch (error) {
               const status = error?.response?.status
               let userMessage
               switch (status) {
@@ -47,7 +47,8 @@ const AuthForm = ({
                   break
               }
               setErrors({ name: userMessage })
-            } finally {
+            }
+            finally {
               setSubmitting(false)
             }
           }}

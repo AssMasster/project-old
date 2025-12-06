@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, Button, FormControl } from 'react-bootstrap'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -23,7 +22,8 @@ const AddChannelModal = () => {
       await dispatch(addChannel({ name })).unwrap()
       showSuccess('modal.add.toastSuccess')
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
       helpers.setErrors({ name: err.message || t('modal.form.netError') })
       helpers.setSubmitting(false)

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import signupSchema from '../../utils/validation/authSchema.js'
 import AuthForm from '../features/auth/AuthForm.jsx'

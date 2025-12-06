@@ -6,14 +6,14 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'build/**']
+    ignores: ['node_modules/**', 'dist/**', 'build/**'],
   },
   js.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
     files: ['**/*.{js,jsx}'],
     plugins: {
-      '@stylistic': stylistic
+      '@stylistic': stylistic,
     },
     languageOptions: {
       globals: globals.browser,
@@ -21,9 +21,9 @@ export default [
       sourceType: 'module',
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     },
     rules: {
       // React правила
@@ -49,12 +49,12 @@ export default [
       '@stylistic/no-trailing-spaces': ['error'],
       '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/operator-linebreak': ['error', 'before'],
-      '@stylistic/semi': ['error', 'never']
+      '@stylistic/semi': ['error', 'never'],
     },
     settings: {
       react: {
-        version: 'detect'
-      }
-    }
-  }
+        version: 'detect',
+      },
+    },
+  },
 ]
