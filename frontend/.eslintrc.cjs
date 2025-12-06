@@ -1,4 +1,4 @@
-// .eslintrc.js
+// .eslintrc.cjs
 module.exports = {
   env: {
     browser: true,
@@ -31,9 +31,6 @@ module.exports = {
     // React правила
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
-    'react/jsx-uses-react': 'off',
-    'react/button-has-type': 'off',
-    'react/jsx-props-no-spreading': 'off',
     
     // Основные правила
     'no-unused-vars': ['error', {
@@ -47,16 +44,11 @@ module.exports = {
         ignorePropertyModificationsFor: ['state', 'draft'],
       },
     ],
-    'max-len': ['error', { 
-      code: 120,
-      ignoreComments: true,
-      ignoreStrings: true,
-    }],
+    'max-len': ['error', { code: 120 }],
     
-    // Правила @stylistic
     '@stylistic/semi': ['error', 'never'],
-    '@stylistic/brace-style': ['error', '1tbs'],
-    '@stylistic/arrow-parens': ['error', 'always'],
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+    '@stylistic/arrow-parens': ['error', 'as-needed'],
     '@stylistic/operator-linebreak': ['error', 'before'],
   },
 };
