@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import FocusLock from 'react-focus-lock'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'

@@ -31,8 +31,7 @@ const AuthForm = ({
             try {
               await onSubmit(values)
               navigate(ROUTES.ROOT)
-            }
-            catch (error) {
+            } catch (error) {
               const status = error?.response?.status
               let userMessage
               switch (status) {
@@ -47,8 +46,7 @@ const AuthForm = ({
                   break
               }
               setErrors({ name: userMessage })
-            }
-            finally {
+            } finally {
               setSubmitting(false)
             }
           }}

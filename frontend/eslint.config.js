@@ -36,10 +36,10 @@ export default [
       'no-unused-vars': ['error'],
       
       // ВСЕ правила @stylistic из ошибок тестов:
+      '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
       '@stylistic/brace-style': ['error', '1tbs'],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
-      '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/jsx-closing-tag-location': ['error'],
       '@stylistic/jsx-indent': ['error', 2],
