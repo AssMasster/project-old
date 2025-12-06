@@ -34,5 +34,4 @@ export default [
       'object-curly-spacing': ['error', 'always'],
       'comma-dangle': ['error', 'always-multiline'],
     },
-  },
-]
+  },]

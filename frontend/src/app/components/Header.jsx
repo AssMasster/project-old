@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './ui/LanguageSwitcher.jsx'
@@ -17,7 +16,7 @@ const Header = () => {
         <Link to={ROUTES.ROOT}>Hexlet Chat</Link>
       </h1>
       <div className="lang-switcher">
-        <LanguageSwitcher/>
+        <LanguageSwitcher />
       </div>
       {hideLogoutButton && (
         <button className="logout-button" onClick={logout}>

@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) => {
     clearLS()
   }, [])
 
-  // Мемоизируем объект value, чтобы он не менялся без необходимости
   const value = useMemo(
     () => ({
       user,
