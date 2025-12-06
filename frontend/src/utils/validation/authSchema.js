@@ -1,8 +1,8 @@
-import * as Yup from 'yup';
-import i18n from '../../app/i18n.js';
+import * as Yup from 'yup'
+import i18n from '../../app/i18n.js'
 
 const signupSchema = () => {
-  const { t } = i18n;
+  const { t } = i18n
   return Yup.object({
     name: Yup.string()
       .min(3, t('validation.auth.tooLong'))
@@ -19,7 +19,7 @@ const signupSchema = () => {
       .oneOf([Yup.ref('password')], t('validation.auth.passwordsMustMatch'))
       .required(t('validation.auth.required'))
       .label(t('auth.formField.confirmPassword')),
-  });
-};
+  })
+}
 
-export default signupSchema;
+export default signupSchema
