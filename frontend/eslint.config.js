@@ -29,12 +29,10 @@ export default [
       // React правила
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      
+      'react/jsx-uses-react': 'off',     
       // Базовые ESLint правила (как в тестах)
       'semi': ['error', 'never'],
-      'no-unused-vars': ['error'],
-      
+      'no-unused-vars': ['error'],  
       // ВСЕ правила @stylistic из ошибок тестов:
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
