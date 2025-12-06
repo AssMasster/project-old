@@ -1,11 +1,11 @@
 env:
   browser: true
   es2021: true
+  node: true
 
 extends:
-  - airbnb
+  - eslint:recommended
   - plugin:react/recommended
-  - plugin:functional/recommended
   - plugin:react-hooks/recommended
 
 parserOptions:
@@ -16,23 +16,38 @@ parserOptions:
 
 plugins:
   - react
-  - functional
+  - react-hooks
+  - '@stylistic'
+
+settings:
+  react:
+    version: detect
 
 rules:
-  import/extensions: 0
-  import/no-unresolved: 0
-  react/prop-types: 0
-  no-console: 0
-  react/react-in-jsx-scope: 0
-  functional/no-conditional-statements: 0
-  functional/no-expression-statements: 0
-  functional/immutable-data: 0
-  functional/functional-parameters: 0
-  functional/no-try-statements: 0
-  functional/no-throw-statements: 0
-  functional/no-return-void: 0
-  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
-  react/function-component-definition: [2, { "namedComponents": "arrow-function" }]
-  testing-library/no-debug: 0
-  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
-  no-param-reassign: 0
+  # React правила
+  react/react-in-jsx-scope: off
+  react/prop-types: off
+  react/jsx-uses-react: off
+  react/button-has-type: off
+  react/jsx-props-no-spreading: off
+  
+  # Основные правила
+  no-unused-vars: 
+    - error
+    - argsIgnorePattern: ^_
+      varsIgnorePattern: ^_
+  no-param-reassign: 
+    - error
+    - props: true
+      ignorePropertyModificationsFor: [state, draft]
+  max-len: 
+    - error
+    - code: 120
+      ignoreComments: true
+      ignoreStrings: true
+  
+  # Правила @stylistic (вручную указываем все нужные правила)
+  '@stylistic/semi': [error, never]
+  '@stylistic/brace-style': [error, 1tbs]
+  '@stylistic/arrow-parens': [error, as-needed]
+  '@stylistic/operator-linebreak': [error, before]
