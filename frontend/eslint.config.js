@@ -38,7 +38,7 @@ export default [
       // ВСЕ правила @stylistic из ошибок тестов:
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
-      '@stylistic/brace-style': ['error', 'stroustrup'], // ← ИЗМЕНЕНО с '1tbs' на 'stroustrup'
+      '@stylistic/brace-style': ['error', 'stroustrup'],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/jsx-closing-tag-location': ['error'],
