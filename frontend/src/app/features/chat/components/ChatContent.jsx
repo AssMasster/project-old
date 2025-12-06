@@ -22,7 +22,7 @@ const ChatContent = () => {
   const channelMessages = useChannelMessages(channelId)
   const elementRef = useAutoScroll([channelMessages])
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (!messageText.trim()) return
 
@@ -40,7 +40,7 @@ const ChatContent = () => {
     <div className="chat-content">
       <div className="chat-title">
         <h2>
-#
+          #
           {censorFilter(channelName)}
         </h2>
         <span>
@@ -52,7 +52,7 @@ const ChatContent = () => {
         {channelMessages.map(({ id, body, username: messageUsername }) => (
           <p key={id}>
             {messageUsername}
-:
+            :
             {censorFilter(body)}
           </p>
         ))}

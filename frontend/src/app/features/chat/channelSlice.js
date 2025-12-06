@@ -39,10 +39,10 @@ const channelsSlice = createSlice({
       })
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // getChannels
     builder
-      .addCase(getChannels.pending, state => {
+      .addCase(getChannels.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -60,7 +60,7 @@ const channelsSlice = createSlice({
       })
     // addChannel
     builder
-      .addCase(addChannel.pending, state => {
+      .addCase(addChannel.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -77,7 +77,7 @@ const channelsSlice = createSlice({
       })
     // removeChannel
     builder
-      .addCase(removeChannel.pending, state => {
+      .addCase(removeChannel.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -91,11 +91,11 @@ const channelsSlice = createSlice({
       })
     // renameChannel
     builder
-      .addCase(renameChannel.pending, state => {
+      .addCase(renameChannel.pending, (state) => {
         state.loading = true
         state.error = null
       })
-      .addCase(renameChannel.fulfilled, state => {
+      .addCase(renameChannel.fulfilled, (state) => {
         state.loading = false
       })
       .addCase(renameChannel.rejected, (state, action) => {

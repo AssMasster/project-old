@@ -9,7 +9,7 @@ const SignupPage = () => {
   const { t } = useTranslation()
   const { signup } = useAuth()
 
-  const handleRegister = async values => {
+  const handleRegister = async (values) => {
     await signup(values)
   }
 

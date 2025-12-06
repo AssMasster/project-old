@@ -1,4 +1,4 @@
-// eslint.config.js - обновленная версия
+// eslint.config.js
 import js from '@eslint/js'
 import globals from 'globals'
 import pluginReact from 'eslint-plugin-react'
@@ -6,26 +6,24 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    ignores: ['**/node_modules/**', 'dist/**', 'build/**'],
+    ignores: ['node_modules/**', 'dist/**', 'build/**']
   },
   js.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
+    files: ['**/*.{js,jsx}'],
     plugins: {
-      '@stylistic': stylistic,
+      '@stylistic': stylistic
     },
     languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
+      globals: globals.browser,
       ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
         ecmaFeatures: {
-          jsx: true,
-        },
-      },
+          jsx: true
+        }
+      }
     },
     rules: {
       // React правила
@@ -33,26 +31,30 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       
-      // Базовые правила ESLint - ВКЛЮЧИТЬ СТРОГО
+      // Базовые ESLint правила (как в тестах)
       'semi': ['error', 'never'],
       'no-unused-vars': ['error'],
       
-      // ВСЕ правила @stylistic как в тестах
+      // ВСЕ правила @stylistic из ошибок тестов:
+      '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
       '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/operator-linebreak': ['error', 'before'],
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
       '@stylistic/eol-last': ['error', 'always'],
-      '@stylistic/no-trailing-spaces': ['error'],
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/jsx-closing-tag-location': ['error'],
+      '@stylistic/jsx-indent': ['error', 2],
+      '@stylistic/jsx-indent-props': ['error', 2],
       '@stylistic/jsx-one-expression-per-line': ['error'],
-      '@stylistic/semi': ['error', 'never'],
+      '@stylistic/jsx-wrap-multilines': ['error'],
+      '@stylistic/no-trailing-spaces': ['error'],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      '@stylistic/operator-linebreak': ['error', 'before'],
+      '@stylistic/semi': ['error', 'never']
     },
     settings: {
       react: {
-        version: 'detect',
-      },
-    },
-  },
+        version: 'detect'
+      }
+    }
+  }
 ]

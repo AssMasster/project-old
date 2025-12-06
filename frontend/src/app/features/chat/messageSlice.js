@@ -24,10 +24,10 @@ const messageSlice = createSlice({
       messagesAdapter.removeMany(state, action.payload)
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // addMessage
     builder
-      .addCase(addMessage.pending, state => {
+      .addCase(addMessage.pending, (state) => {
         state.loading = true
         state.error = null
       })
@@ -42,7 +42,7 @@ const messageSlice = createSlice({
       })
     // getMessages
     builder
-      .addCase(getMessages.pending, state => {
+      .addCase(getMessages.pending, (state) => {
         state.loading = true
         state.error = null
       })

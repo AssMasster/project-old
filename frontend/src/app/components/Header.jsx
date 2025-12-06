@@ -14,7 +14,7 @@ const Header = () => {
     <header className="chat-header">
       <h1>
         <Link to={ROUTES.ROOT}>
-Hexlet Chat
+          Hexlet Chat
         </Link>
       </h1>
       <div className="lang-switcher">

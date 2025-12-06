@@ -16,7 +16,7 @@ const LoginPage = () => {
     }
   }, [isAuthenticated, navigate])
 
-  const handleLogin = async values => {
+  const handleLogin = async (values) => {
     await login(values)
   }
 

@@ -6,7 +6,7 @@ const useToast = () => {
 
   const showSuccess = messageKey => toast.success(t(messageKey))
 
-  const showError = error => {
+  const showError = (error) => {
     const message = error.message || t('modal.form.netError')
     toast.error(message)
   }

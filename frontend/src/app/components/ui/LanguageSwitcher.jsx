@@ -15,10 +15,10 @@ const LanguageSwitcher = () => {
 
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => handleChange('ru')}>
-RU
+            RU
           </Dropdown.Item>
           <Dropdown.Item onClick={() => handleChange('en')}>
-EN
+            EN
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
