@@ -22,7 +22,8 @@ const AddChannelModal = () => {
       await dispatch(addChannel({ name })).unwrap()
       showSuccess('modal.add.toastSuccess')
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
       helpers.setErrors({ name: err.message || t('modal.form.netError') })
       helpers.setSubmitting(false)

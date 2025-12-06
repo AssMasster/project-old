@@ -18,7 +18,8 @@ const RemoveChannelModal = ({ channelId }) => {
       await dispatch(removeChannel(channelId)).unwrap()
       showSuccess('modal.remove.toastSuccess')
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
     }
   }

@@ -10,7 +10,8 @@ export const getChannels = createAsyncThunk(
     try {
       const response = await axios.get('/api/v1/channels', getAuthHeader())
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },
@@ -26,7 +27,8 @@ export const addChannel = createAsyncThunk(
         getAuthHeader(),
       )
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },
@@ -42,7 +44,8 @@ export const renameChannel = createAsyncThunk(
         getAuthHeader(),
       )
       return response.data
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },
@@ -58,7 +61,8 @@ export const removeChannel = createAsyncThunk(
         payload: DEFAULT_CHANNEL_ID,
       })
       return id
-    } catch (err) {
+    }
+    catch (err) {
       return handleError(err, thunkAPI)
     }
   },

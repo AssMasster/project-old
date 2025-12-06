@@ -26,7 +26,8 @@ const RenameChannelModal = ({ channelId }) => {
       showSuccess('modal.rename.toastSuccess')
       helpers.setSubmitting(false)
       handleClose()
-    } catch (err) {
+    }
+    catch (err) {
       showError(err)
       helpers.setErrors({ name: err.message || t('modal.form.netError') })
       helpers.setSubmitting(false)

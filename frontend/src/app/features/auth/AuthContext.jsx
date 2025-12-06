@@ -37,7 +37,8 @@ export const AuthProvider = ({ children }) => {
       })
       setUser(data.username)
       setToken(data.token)
-    } catch (err) {
+    }
+    catch (err) {
       setError(apiError(err))
       throw err
     }
@@ -52,7 +53,8 @@ export const AuthProvider = ({ children }) => {
       })
       setUser(data.username)
       setToken(data.token)
-    } catch (err) {
+    }
+    catch (err) {
       setError(apiError(err))
       throw err
     }
