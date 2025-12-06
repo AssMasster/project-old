@@ -34,15 +34,15 @@ const AuthForm = ({
               const status = error?.response?.status
               let userMessage
               switch (status) {
-              case 401:
-                userMessage = t('auth.errors.loginFailed')
-                break
-              case 409:
-                userMessage = t('auth.errors.userExists')
-                break
-              default:
-                userMessage = t('auth.errors.network')
-                break
+                case 401:
+                  userMessage = t('auth.errors.loginFailed')
+                  break
+                case 409:
+                  userMessage = t('auth.errors.userExists')
+                  break
+                default:
+                  userMessage = t('auth.errors.network')
+                  break
               }
               setErrors({ name: userMessage })
             } finally {
