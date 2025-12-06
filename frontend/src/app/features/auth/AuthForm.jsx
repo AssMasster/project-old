@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import StyledWrapper from '../../../styles/authFormStyles.js';
-import { ROUTES } from '../../routes.jsx';
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import StyledWrapper from '../../../styles/authFormStyles.js'
+import { ROUTES } from '../../routes.jsx'
 
 const AuthForm = ({
   t,
@@ -16,7 +16,7 @@ const AuthForm = ({
   schema,
   buttonName,
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <StyledWrapper>
@@ -28,25 +28,25 @@ const AuthForm = ({
           validateOnBlur={false}
           onSubmit={async (values, { setSubmitting, setErrors }) => {
             try {
-              await onSubmit(values);
-              navigate(ROUTES.ROOT);
+              await onSubmit(values)
+              navigate(ROUTES.ROOT)
             } catch (error) {
-              const status = error?.response?.status;
-              let userMessage;
+              const status = error?.response?.status
+              let userMessage
               switch (status) {
-                case 401:
-                  userMessage = t('auth.errors.loginFailed');
-                  break;
-                case 409:
-                  userMessage = t('auth.errors.userExists');
-                  break;
-                default:
-                  userMessage = t('auth.errors.network');
-                  break;
+              case 401:
+                userMessage = t('auth.errors.loginFailed')
+                break
+              case 409:
+                userMessage = t('auth.errors.userExists')
+                break
+              default:
+                userMessage = t('auth.errors.network')
+                break
               }
-              setErrors({ name: userMessage });
+              setErrors({ name: userMessage })
             } finally {
-              setSubmitting(false);
+              setSubmitting(false)
             }
           }}
         >
@@ -88,7 +88,7 @@ const AuthForm = ({
         </p>
       </div>
     </StyledWrapper>
-  );
-};
+  )
+}
 
-export default AuthForm;
+export default AuthForm

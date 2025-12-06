@@ -1,27 +1,27 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { openModal } from '../../ui/modalSlice.js';
+import React, { useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { openModal } from '../../ui/modalSlice.js'
 
 const ChannelDropdown = ({ channelId }) => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const [show, setShow] = useState(false)
 
-  const handleToggle = useCallback((nextShow) => setShow(nextShow), []);
-  const closeDropdown = useCallback(() => setShow(false), []);
+  const handleToggle = useCallback(nextShow => setShow(nextShow), [])
+  const closeDropdown = useCallback(() => setShow(false), [])
 
   const openRemove = () => {
-    closeDropdown();
-    dispatch(openModal({ type: 'removeChannel', props: { channelId } }));
-  };
+    closeDropdown()
+    dispatch(openModal({ type: 'removeChannel', props: { channelId } }))
+  }
 
   const openRename = () => {
-    closeDropdown();
-    dispatch(openModal({ type: 'renameChannel', props: { channelId } }));
-  };
+    closeDropdown()
+    dispatch(openModal({ type: 'renameChannel', props: { channelId } }))
+  }
 
   return (
     <Dropdown
@@ -43,7 +43,7 @@ const ChannelDropdown = ({ channelId }) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
+}
 
-export default ChannelDropdown;
+export default ChannelDropdown

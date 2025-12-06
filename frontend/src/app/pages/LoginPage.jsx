@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import useAuth from '../../hooks/useAuth.js';
-import AuthForm from '../features/auth/AuthForm.jsx';
-import { ROUTES } from '../routes.jsx';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import useAuth from '../../hooks/useAuth.js'
+import AuthForm from '../features/auth/AuthForm.jsx'
+import { ROUTES } from '../routes.jsx'
 
 const LoginPage = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { isAuthenticated, login } = useAuth();
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const { isAuthenticated, login } = useAuth()
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(ROUTES.ROOT);
+      navigate(ROUTES.ROOT)
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate])
 
-  const handleLogin = async (values) => {
-    await login(values);
-  };
+  const handleLogin = async values => {
+    await login(values)
+  }
 
   return (
     <AuthForm
@@ -39,7 +39,7 @@ const LoginPage = () => {
       switchLink={ROUTES.SIGNUP}
       buttonName={t('auth.login.button')}
     />
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

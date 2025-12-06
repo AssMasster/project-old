@@ -1,12 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { routes } from './routesConfig.jsx';
-import ToastNotifications from './components/ui/ToastNotifications.jsx';
-import useSocket from '../hooks/useSocket.js';
-import ModalRoot from './features/ui/ModalRoot.jsx';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { routes } from './routesConfig.jsx'
+import ToastNotifications from './components/ui/ToastNotifications.jsx'
+import useSocket from '../hooks/useSocket.js'
+import ModalRoot from './features/ui/ModalRoot.jsx'
 
 const App = () => {
-  useSocket();
+  useSocket()
 
   return (
     <Router>
@@ -18,7 +18,7 @@ const App = () => {
       </Routes>
       <ModalRoot />
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App

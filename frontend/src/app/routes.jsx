@@ -3,4 +3,4 @@ export const ROUTES = Object.freeze({
   LOGIN: '/login',
   SIGNUP: '/signup',
   NOT_FOUND: '*',
-});
+})

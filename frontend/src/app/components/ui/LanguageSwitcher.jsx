@@ -1,12 +1,12 @@
-import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useTranslation } from 'react-i18next';
-import { StyledDropdown } from '../../../styles/StyledLanguageSwitcher.jsx';
+import React from 'react'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { useTranslation } from 'react-i18next'
+import { StyledDropdown } from '../../../styles/StyledLanguageSwitcher.jsx'
 
 const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
-  const handleChange = (lang) => i18n.changeLanguage(lang);
+  const handleChange = lang => i18n.changeLanguage(lang)
   return (
     <StyledDropdown>
       <Dropdown>
@@ -20,7 +20,7 @@ const LanguageSwitcher = () => {
         </Dropdown.Menu>
       </Dropdown>
     </StyledDropdown>
-  );
-};
+  )
+}
 
-export default LanguageSwitcher;
+export default LanguageSwitcher

@@ -1,17 +1,17 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import signupSchema from '../../utils/validation/authSchema.js';
-import AuthForm from '../features/auth/AuthForm.jsx';
-import { ROUTES } from '../routes.jsx';
-import useAuth from '../../hooks/useAuth.js';
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import signupSchema from '../../utils/validation/authSchema.js'
+import AuthForm from '../features/auth/AuthForm.jsx'
+import { ROUTES } from '../routes.jsx'
+import useAuth from '../../hooks/useAuth.js'
 
 const SignupPage = () => {
-  const { t } = useTranslation();
-  const { signup } = useAuth();
+  const { t } = useTranslation()
+  const { signup } = useAuth()
 
-  const handleRegister = async (values) => {
-    await signup(values);
-  };
+  const handleRegister = async values => {
+    await signup(values)
+  }
 
   return (
     <div>
@@ -44,7 +44,7 @@ const SignupPage = () => {
         buttonName={t('auth.signUp.button')}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SignupPage;
+export default SignupPage

@@ -1,30 +1,38 @@
 // eslint.config.js
 import js from '@eslint/js'
+import globals from 'globals'
 import pluginReact from 'eslint-plugin-react'
-import stylistic from '@stylistic/eslint-plugin'
 
 export default [
+  {
+    ignores: ['node_modules/**', 'dist/**', 'build/**'],
+  },
   js.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
-    plugins: {
-      '@stylistic': stylistic,
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    languageOptions: {
+      globals: globals.browser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
     rules: {
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
-      
-      // Правила @stylistic из тестов
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/operator-linebreak': ['error', 'before'],
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/object-curly-spacing': ['error', 'always'],
-      '@stylistic/jsx-tag-spacing': 'error',
-      '@stylistic/jsx-one-expression-per-line': 'off',
-      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      // Правила как в тестах
+      'semi': ['error', 'never'],
+      'brace-style': ['error', '1tbs'],
+      'arrow-parens': ['error', 'as-needed'],
+      'operator-linebreak': ['error', 'before'],
+      'indent': ['error', 2],
+      'object-curly-spacing': ['error', 'always'],
+      'comma-dangle': ['error', 'always-multiline'],
     },
   },
 ]

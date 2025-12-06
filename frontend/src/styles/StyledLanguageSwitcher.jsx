@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Dropdown from 'react-bootstrap/Dropdown';
+import styled from 'styled-components'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 export const StyledDropdown = styled(Dropdown)`
   display: flex;
@@ -35,4 +35,4 @@ export const StyledDropdown = styled(Dropdown)`
       }
     }
   }
-`;
+`

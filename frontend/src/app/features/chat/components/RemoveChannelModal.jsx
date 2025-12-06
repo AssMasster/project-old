@@ -1,28 +1,28 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Modal, Button } from 'react-bootstrap';
-import FocusLock from 'react-focus-lock';
-import { useTranslation } from 'react-i18next';
-import { removeChannel } from '../../../../services/api/channelsApi.js';
-import { closeModal } from '../../ui/modalSlice.js';
-import useToast from '../../../../hooks/useToast.js';
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Modal, Button } from 'react-bootstrap'
+import FocusLock from 'react-focus-lock'
+import { useTranslation } from 'react-i18next'
+import { removeChannel } from '../../../../services/api/channelsApi.js'
+import { closeModal } from '../../ui/modalSlice.js'
+import useToast from '../../../../hooks/useToast.js'
 
 const RemoveChannelModal = ({ channelId }) => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const { showSuccess, showError } = useToast();
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+  const { showSuccess, showError } = useToast()
 
-  const handleClose = () => dispatch(closeModal());
+  const handleClose = () => dispatch(closeModal())
 
   const handleRemove = async () => {
     try {
-      await dispatch(removeChannel(channelId)).unwrap();
-      showSuccess('modal.remove.toastSuccess');
-      handleClose();
+      await dispatch(removeChannel(channelId)).unwrap()
+      showSuccess('modal.remove.toastSuccess')
+      handleClose()
     } catch (err) {
-      showError(err);
+      showError(err)
     }
-  };
+  }
 
   return (
     <Modal show onHide={handleClose} data-bs-theme="dark">
@@ -43,7 +43,7 @@ const RemoveChannelModal = ({ channelId }) => {
         </Modal.Footer>
       </FocusLock>
     </Modal>
-  );
-};
+  )
+}
 
-export default RemoveChannelModal;
+export default RemoveChannelModal

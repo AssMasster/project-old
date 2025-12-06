@@ -1,34 +1,34 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Button, FormControl } from 'react-bootstrap';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useTranslation } from 'react-i18next';
-import FocusLock from 'react-focus-lock';
-import modalSchema from '../../../../utils/validation/modalSchema.js';
-import { selectAllChannels } from '../channelSlice.js';
-import { addChannel } from '../../../../services/api/channelsApi.js';
-import { closeModal } from '../../ui/modalSlice.js';
-import useToast from '../../../../hooks/useToast.js';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Modal, Button, FormControl } from 'react-bootstrap'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useTranslation } from 'react-i18next'
+import FocusLock from 'react-focus-lock'
+import modalSchema from '../../../../utils/validation/modalSchema.js'
+import { selectAllChannels } from '../channelSlice.js'
+import { addChannel } from '../../../../services/api/channelsApi.js'
+import { closeModal } from '../../ui/modalSlice.js'
+import useToast from '../../../../hooks/useToast.js'
 
 const AddChannelModal = () => {
-  const { t } = useTranslation();
-  const { showSuccess, showError } = useToast();
-  const dispatch = useDispatch();
-  const channelNames = useSelector(selectAllChannels).map((c) => c.name);
+  const { t } = useTranslation()
+  const { showSuccess, showError } = useToast()
+  const dispatch = useDispatch()
+  const channelNames = useSelector(selectAllChannels).map(c => c.name)
 
-  const handleClose = () => dispatch(closeModal());
+  const handleClose = () => dispatch(closeModal())
 
   const handleSubmit = async ({ name }, helpers) => {
     try {
-      await dispatch(addChannel({ name })).unwrap();
-      showSuccess('modal.add.toastSuccess');
-      handleClose();
+      await dispatch(addChannel({ name })).unwrap()
+      showSuccess('modal.add.toastSuccess')
+      handleClose()
     } catch (err) {
-      showError(err);
-      helpers.setErrors({ name: err.message || t('modal.form.netError') });
-      helpers.setSubmitting(false);
+      showError(err)
+      helpers.setErrors({ name: err.message || t('modal.form.netError') })
+      helpers.setSubmitting(false)
     }
-  };
+  }
 
   return (
     <Modal show onHide={handleClose} data-bs-theme="dark">
@@ -83,7 +83,7 @@ const AddChannelModal = () => {
         </Formik>
       </FocusLock>
     </Modal>
-  );
-};
+  )
+}
 
-export default AddChannelModal;
+export default AddChannelModal

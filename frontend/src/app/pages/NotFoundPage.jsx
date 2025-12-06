@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import StyledButton from '../../styles/styledButton.js';
-import { ROUTES } from '../routes.jsx';
+import React from 'react'
+import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
+import StyledButton from '../../styles/styledButton.js'
+import { ROUTES } from '../routes.jsx'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -14,10 +14,10 @@ const Wrapper = styled.div`
     font-size: 100px;
     margin-top: 100px;
   }
-`;
+`
 
 const NotFoundPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <Wrapper>
@@ -27,7 +27,7 @@ const NotFoundPage = () => {
         {t('pages.notFound.button')}
       </StyledButton>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

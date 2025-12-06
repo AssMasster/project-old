@@ -1,11 +1,11 @@
-import React from 'react';
-import LoginPage from './pages/LoginPage.jsx';
-import MainChatPage from './pages/MainChatPage.jsx';
-import NotFoundPage from './pages/NotFoundPage.jsx';
-import SignupPage from './pages/SignupPage.jsx';
-import AppLayout from './layouts/AppLayout.jsx';
-import ProtectedRoute from './features/auth/ProtectedRoute.jsx';
-import { ROUTES } from './routes.jsx';
+import React from 'react'
+import LoginPage from './pages/LoginPage.jsx'
+import MainChatPage from './pages/MainChatPage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
+import SignupPage from './pages/SignupPage.jsx'
+import AppLayout from './layouts/AppLayout.jsx'
+import ProtectedRoute from './features/auth/ProtectedRoute.jsx'
+import { ROUTES } from './routes.jsx'
 
 export const routes = [
   {
@@ -42,4 +42,4 @@ export const routes = [
       </ProtectedRoute>
     ),
   },
-];
+]

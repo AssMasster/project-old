@@ -1,6 +1,6 @@
-import React from 'react';
-import { ToastContainer, Slide } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from 'react'
+import { ToastContainer, Slide } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ToastNotifications = () => (
   <ToastContainer
@@ -17,6 +17,6 @@ const ToastNotifications = () => (
     theme="dark"
     transition={Slide}
   />
-);
+)
 
-export default ToastNotifications;
+export default ToastNotifications
