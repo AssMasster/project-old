@@ -1,3 +1,4 @@
+// eslint.config.js - обновленная версия
 import js from '@eslint/js'
 import globals from 'globals'
 import pluginReact from 'eslint-plugin-react'
@@ -5,7 +6,7 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'build/**'],
+    ignores: ['**/node_modules/**', 'dist/**', 'build/**'],
   },
   js.configs.recommended,
   pluginReact.configs.flat.recommended,
@@ -32,10 +33,11 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       
-      // Базовые правила ESLint
+      // Базовые правила ESLint - ВКЛЮЧИТЬ СТРОГО
       'semi': ['error', 'never'],
+      'no-unused-vars': ['error'],
       
-      // Правила @stylistic с префиксом
+      // ВСЕ правила @stylistic как в тестах
       '@stylistic/brace-style': ['error', '1tbs'],
       '@stylistic/arrow-parens': ['error', 'as-needed'],
       '@stylistic/operator-linebreak': ['error', 'before'],
@@ -43,9 +45,14 @@ export default [
       '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
       '@stylistic/eol-last': ['error', 'always'],
-      '@stylistic/jsx-one-expression-per-line': ['error', { 
-        allow: 'single-line' 
-      }],
+      '@stylistic/no-trailing-spaces': ['error'],
+      '@stylistic/jsx-one-expression-per-line': ['error'],
+      '@stylistic/semi': ['error', 'never'],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
 ]

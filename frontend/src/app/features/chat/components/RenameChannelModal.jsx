@@ -47,7 +47,9 @@ const RenameChannelModal = ({ channelId }) => {
           {({ isSubmitting }) => (
             <Form noValidate>
               <Modal.Header closeButton>
-                <Modal.Title>{t('modal.rename.title')}</Modal.Title>
+                <Modal.Title>
+                  {t('modal.rename.title')}
+                </Modal.Title>
               </Modal.Header>
 
               <Modal.Body>

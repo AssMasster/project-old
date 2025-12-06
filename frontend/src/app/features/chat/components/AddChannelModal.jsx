@@ -43,7 +43,9 @@ const AddChannelModal = () => {
           {({ isSubmitting }) => (
             <Form noValidate>
               <Modal.Header closeButton>
-                <Modal.Title>{t('modal.add.title')}</Modal.Title>
+                <Modal.Title>
+                  {t('modal.add.title')}
+                </Modal.Title>
               </Modal.Header>
 
               <Modal.Body>

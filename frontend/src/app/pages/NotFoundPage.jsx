@@ -21,8 +21,12 @@ const NotFoundPage = () => {
 
   return (
     <Wrapper>
-      <h1>{t('pages.notFound.title')}</h1>
-      <p>{t('pages.notFound.message')}</p>
+      <h1>
+        {t('pages.notFound.title')}
+      </h1>
+      <p>
+        {t('pages.notFound.message')}
+      </p>
       <StyledButton to={ROUTES.LOGIN}>
         {t('pages.notFound.button')}
       </StyledButton>

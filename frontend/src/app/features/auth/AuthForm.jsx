@@ -21,7 +21,9 @@ const AuthForm = ({
   return (
     <StyledWrapper>
       <div className="login-box">
-        <p>{title}</p>
+        <p>
+          {title}
+        </p>
         <Formik
           initialValues={initialValues}
           validationSchema={schema}
@@ -66,7 +68,9 @@ const AuthForm = ({
                     component="div"
                     className="invalid-feedback"
                   />
-                  <label htmlFor={name}>{label}</label>
+                  <label htmlFor={name}>
+                    {label}
+                  </label>
                 </div>
               ))}
 

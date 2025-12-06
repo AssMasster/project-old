@@ -28,7 +28,9 @@ const ChatSidebar = () => {
   return (
     <div className="chat-sidebar">
       <div className="channels-header">
-        <span>{t('sidebar.channels')}</span>
+        <span>
+          {t('sidebar.channels')}
+        </span>
         <button
           className="add-channel"
           onClick={handleAddChannel}
@@ -51,7 +53,10 @@ const ChatSidebar = () => {
               }}
               onKeyDown={e => onChannelKeyDown(e, id)}
             >
-              <span className="channel-name">#{censorFilter(name)}</span>
+              <span className="channel-name">
+#
+                {censorFilter(name)}
+              </span>
               {removable && <ChannelDropdown channelId={id} />}
             </div>
           </li>

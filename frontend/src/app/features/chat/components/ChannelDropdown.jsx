@@ -31,7 +31,9 @@ const ChannelDropdown = ({ channelId }) => {
       onToggle={handleToggle}
     >
       <Dropdown.Toggle split variant="success">
-        <span className="sr-only">{t('sidebar.channelActions')}</span>
+        <span className="sr-only">
+          {t('sidebar.channelActions')}
+        </span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu>

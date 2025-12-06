@@ -28,10 +28,14 @@ const RemoveChannelModal = ({ channelId }) => {
     <Modal show onHide={handleClose} data-bs-theme="dark">
       <FocusLock returnFocus>
         <Modal.Header closeButton>
-          <Modal.Title>{t('modal.remove.title')}</Modal.Title>
+          <Modal.Title>
+            {t('modal.remove.title')}
+          </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>{t('modal.remove.body')}</Modal.Body>
+        <Modal.Body>
+          {t('modal.remove.body')}
+        </Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
