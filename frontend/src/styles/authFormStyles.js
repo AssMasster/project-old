@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
   .login-box {
@@ -249,6 +249,6 @@ const StyledWrapper = styled.div`
   .no-wrap {
     white-space: nowrap;
   }
-`
+`;
 
-export default StyledWrapper
+export default StyledWrapper;

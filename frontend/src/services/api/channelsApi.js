@@ -1,20 +1,20 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { getAuthHeader, handleError } from './apiHelpers.js'
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { getAuthHeader, handleError } from './apiHelpers.js';
 
-const DEFAULT_CHANNEL_ID = '1'
+const DEFAULT_CHANNEL_ID = '1';
 
 export const getChannels = createAsyncThunk(
   'chat/getChannels',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/api/v1/channels', getAuthHeader())
-      return response.data
+      const response = await axios.get('/api/v1/channels', getAuthHeader());
+      return response.data;
     } catch (err) {
-      return handleError(err, thunkAPI)
+      return handleError(err, thunkAPI);
     }
   },
-)
+);
 
 export const addChannel = createAsyncThunk(
   'chat/addChannel',
@@ -24,13 +24,13 @@ export const addChannel = createAsyncThunk(
         '/api/v1/channels',
         { name },
         getAuthHeader(),
-      )
-      return response.data
+      );
+      return response.data;
     } catch (err) {
-      return handleError(err, thunkAPI)
+      return handleError(err, thunkAPI);
     }
   },
-)
+);
 
 export const renameChannel = createAsyncThunk(
   'chat/editChannel',
@@ -40,26 +40,26 @@ export const renameChannel = createAsyncThunk(
         `/api/v1/channels/${id}`,
         { name },
         getAuthHeader(),
-      )
-      return response.data
+      );
+      return response.data;
     } catch (err) {
-      return handleError(err, thunkAPI)
+      return handleError(err, thunkAPI);
     }
   },
-)
+);
 
 export const removeChannel = createAsyncThunk(
   'chat/removeChannel',
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`/api/v1/channels/${id}`, getAuthHeader())
+      await axios.delete(`/api/v1/channels/${id}`, getAuthHeader());
       thunkAPI.dispatch({
         type: 'channels/setActiveChannel',
         payload: DEFAULT_CHANNEL_ID,
-      })
-      return id
+      });
+      return id;
     } catch (err) {
-      return handleError(err, thunkAPI)
+      return handleError(err, thunkAPI);
     }
   },
-)
+);
